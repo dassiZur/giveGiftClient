@@ -1,0 +1,14 @@
+.imgCards{
+    height: 500px;
+    width: 300px;
+}
+//משנה את התמונות רק בf12
+//אבל לא משנה כשאני מעתיקה לכאן
+img, svg {
+    vertical-align: middle;
+    margin-top: 20px;
+    width: 850px;
+}
+img {
+    width: 850px;
+}
