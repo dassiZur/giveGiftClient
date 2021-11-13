@@ -58,9 +58,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store} >
 
+      <Router history={history}>
       <Menu />
       <App />
-      <Router history={history}>
         <Switch>
 
           <Route path='/About' component={About}></Route>
