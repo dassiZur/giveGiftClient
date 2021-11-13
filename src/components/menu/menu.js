@@ -35,16 +35,16 @@ const Menu = (props) => {
         <Navbar bg="light" expand="lg" className="navbar">
             <Container className="container">
 
-                {/* <Navbar.Brand href="/About" className="NavbarBrand" >אודות</Navbar.Brand>   */}
+                {/* <Navbar.Brand as={Link} to="/About" className="NavbarBrand" >אודות</Navbar.Brand>   */}
                 <Nav className="me-auto">
-                    <Nav.Link href="/About" >אודות</Nav.Link>
-                    <Nav.Link href="/getStepContent" >בעלי עסקים לפרסומות</Nav.Link>
-                    {/* <Nav.Link href="/ExactSerarch">חיפוש מדויק</Nav.Link> */}
-                    <Nav.Link href="/greetingCard">כרטיסי ברכה</Nav.Link>
-                    <Nav.Link href="/Store">חנויות</Nav.Link>
-                    <Nav.Link href="/ShareGift">שתפו במתנה</Nav.Link>
-                    <Nav.Link href="/Try">try</Nav.Link>
-                    <Nav.Link href="/ChoseCategories">
+                    <Nav.Link as={Link} to="/About" >אודות</Nav.Link>
+                    <Nav.Link as={Link} to="/getStepContent" >בעלי עסקים לפרסומות</Nav.Link>
+                    {/* <Nav.Link as={Link} to="/ExactSerarch">חיפוש מדויק</Nav.Link> */}
+                    <Nav.Link as={Link} to="/greetingCard">כרטיסי ברכה</Nav.Link>
+                    <Nav.Link as={Link} to="/Store">חנויות</Nav.Link>
+                    <Nav.Link as={Link} to="/ShareGift">שתפו במתנה</Nav.Link>
+                    <Nav.Link as={Link} to="/Try">try</Nav.Link>
+                    <Nav.Link as={Link} to="/ChoseCategories">
                     בחירת קטגוריה
                     </Nav.Link>
 
@@ -55,7 +55,7 @@ const Menu = (props) => {
 
                             return (<div key={item._id}>
 
-                                <NavDropdown title={item.nameCategory} id="basic-nav-dropdown" href="{`/SerchByCategory/${item.nameCategory} `}">
+                                <NavDropdown title={item.nameCategory} id="basic-nav-dropdown" as={Link} to="{`/SerchByCategory/${item.nameCategory} `}">
                                     <SerchByCategoryChild idCategoryChild={item._id}></SerchByCategoryChild>
 
                                 </NavDropdown>
@@ -65,7 +65,7 @@ const Menu = (props) => {
                     </NavDropdown>*/}
 
                 </Nav>
-                <Nav.Link href="/Logo">
+                <Nav.Link as={Link} to="/Logo">
                     <Logo></Logo>
                 </Nav.Link>
             </Container>
