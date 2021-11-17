@@ -26,7 +26,13 @@ ui.label>.close.icon, .ui.label>.delete.icon {
   opacity: .5;
   transition: background .1s ease;
 }
-
+.ui * {
+  direction: rtl;
+  text-align: center;
+  margin-right: 24px;
+  width: 418px;
+  font-size: 24px;
+}
 /* ui.label > .icon {
  &.close,.delete{
   cursor: pointer;

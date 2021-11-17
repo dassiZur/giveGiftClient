@@ -1,5 +1,20 @@
+.h1Upload{
+    color: #81005F;
+margin-top: 60px;
+}
+.divBefor{
+    margin-top: -88px;
 
-
+}
+.allDiv {
+    background-color: white;
+    width: 884px;
+    height: 500px;
+    /* margin-left: 136px; */
+    margin-right: 370px;
+    margin-top: 43px;
+    height: 1195px;
+}
 .MuiSlider-root {
     color:#81005F;
     width: 100%;
@@ -28,11 +43,15 @@
     background-color:#81005F;
   
 }
-.input1{
+.input1 {
+    border: none;
+    border-bottom: 4px solid #81005F;
+    width: 152px;
+}
+.input2{
     border: none;
     border-bottom: 4px solid #81005F; 
-    background-color:#e2e2e2 ;
-    
+    width: 152px;
 }
 // .picName {
 //     color: #81005F;
@@ -40,15 +59,23 @@
 //     margin-top: 138px;
     
 // }
+
 .picName {
     display: inline-block;
     color: #81005F;
-    margin-right: -443px;
-    margin-top: 102px;
+    margin-right: 83px;
+    /* margin-top: 102px; */
     font-size: 27px;
     /* display: block; */
 }
-.comment {
+.picName2 {
+    display: inline-block;
+    color: #81005F;
+    margin-right: -39px;
+    margin-top: 150px;
+    font-size: 27px;
+    /* display: block; */
+}.comment {
     color: #81005F;
     margin-right: 535px;
     margin-top: 102px;
@@ -84,9 +111,14 @@
     width: 30px;
     height: 20px;
 }
+select {
+    word-wrap: normal;
+    width: 161px;
+
+}
 button, input, optgroup, select, textarea {
     font-family: sans-serif;
-    font-size: 281%;
+    font-size: 172%;
     line-height: -117.85;
     margin: 0;
     display: inline-block;

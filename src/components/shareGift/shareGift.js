@@ -9,7 +9,7 @@ import axios from "axios"
 import serchByCategoryChild from "../serchByCategoryChild/serchByCategoryChild";
 import { postGift } from '../../actions/gift';
 import { useHistory } from "react-router-dom";
-
+import { Select, Input } from 'semantic-ui-react'
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import UploadPhotos from "../functions/UploadPhotos";
@@ -47,7 +47,7 @@ const ShareGift = (props) => {
 
             alert("מתנה התווסה בהצלחה!!!")
             history.push('try')
-        }).catch(err => {debugger; console.log("ההוספה לא הצליחה"); })
+        }).catch(err => { debugger; console.log("ההוספה לא הצליחה"); })
     }
     const handleChange = (e) => {
         console.log("e.target.value")
@@ -86,15 +86,15 @@ const ShareGift = (props) => {
         }
         console.log("arrDropDown  " + arrDropDown)
     }
+
     return (
-        <div>
+        <div className="allDiv">
 
-            <div>
-                <lable class="picName" > שם תמונה</lable>
-                <input class="input1" type="text" onChange={(e) => { handleNameGift(e) }}></input>
-            </div>
+            <h1 className="h1Upload">טופס למילוי הוספת תמונת מתנה לאתר</h1>
+            <div className="divBefor">
+                <lable class="picName2" > שם תמונה</lable>
+                <input class="input2" type="text" onChange={(e) => { handleNameGift(e) }}></input>
 
-            <div>
                 <lable class="picName"> הערות על המתנה</lable>
                 <input class="input1" onChange={(e) => { remark = e.target.value }}></input>
             </div>
@@ -125,6 +125,7 @@ const ShareGift = (props) => {
 
             <br></br>
             <div>
+
                 <lable class="picName"> בחר\י אופי</lable>
                 <select onChange={(e) => { handleChangeCharacter(e) }}>
                     <option value={"ביישן"}>ביישן </option>
