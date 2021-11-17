@@ -14,7 +14,7 @@ export const getGift = () => {
         // let id = user._id
         axios.get("http://localhost:5000/gifts/getByUser/"+user._id,)
             .then(succ => {
-                dispatch(getAllGift(succ.data))
+                dispatch(getAllGift(succ.data.reverse()))
             }).catch(err => { debugger; console.log("============this is mistake" + err.message) })
     }
 }
