@@ -176,7 +176,7 @@ const SerchByCategoryChild = (props) => {
     const [giftsArr, setGiftsArr] = useState([]);
     const getAllImag = () => {
         debugger;
-        axios.get(`http://localhost:5000/gifts/getByIdParentCategory/${'61281845ea8862259cd666ce'} `). then(succ => {                    
+        axios.get(`http://localhost:5000/gifts/getByIdParentCategory/${id} `). then(succ => {                    
             var arrImg = [];
             debugger;
             succ.data.forEach(element => {
