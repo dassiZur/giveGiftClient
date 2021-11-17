@@ -87,83 +87,81 @@ function DetailsGitUser(props) {
     };
     return (
         <table>
-            <tr>
-                <th >שם מתנה</th>
-                <th >הערה</th>
-                <th >טווח גיל</th>
-                <th >טווח מחיר</th>
-                <th >אופי</th>
-                <th >קטגוריה </th>
-                <th >תת קטגוריה </th>
-                <th >סטטוס</th>
+            <thead>
+                <tr>
+                    <th >תמונה</th>
+                    <th >שם מתנה</th>
+                    <th >הערה</th>
+                    <th >טווח גיל</th>
+                    <th >טווח מחיר</th>
+                    <th >אופי</th>
+                    <th >קטגוריה </th>
+                    <th >תת קטגוריה </th>
+                    <th >סטטוס</th>
 
-                {/* <TableCell>Last Name</TableCell>
+                    {/* <TableCell>Last Name</TableCell>
                                 <TableCell>City</TableCell> */}
-            </tr>
-            {props.arr ?
-                props.arr.map((row, i) => {
-                    return (
-                        <tr>
-                            {
-                                <div>
-                                    <td  >
-                                        {row.nameGift}
-                                    </td>
-                                    <td >
-                                        {row.remark}
-                                    </td>                                                        <td >
-                                        {row.ageRange[0]}-{row.ageRange[1]}
-                                    </td>                                                        <td >
-                                        {row.price[0]}-{row.price[1]}
-                                    </td>                                                        <td >
-                                        {row.character}
-                                    </td>                                                        <td >
-                                        {row.nameGift}
-                                    </td>                                                        <td >
-                                        {row.status}
-                                    </td>
-                                    <td>
-                                        <Button className="mr10" onClick={() => dialog(i)}>
-                                            <DeleteOutlineIcon />
-                                        </Button>
-                                    </td>
-                                    {showConfirm &&
+                </tr>
+            </thead>
+            <tbody>
+                {props.arr ?
+                    props.arr.map((row, i) => {
+                        return (
+                            <tr key={i}>
+                                
+                                    {/* <div> */}
+                                    <td><img src={"http://localhost:5000/"+row.gifPhoto} className="imgg" /></td>
+                                        <td>{row.nameGift}</td>
+                                        <td>{row.remark}</td>
+                                        <td >{row.ageRange[0]}-{row.ageRange[1]}</td>
+                                        <td >{row.price[0]}-{row.price[1]}</td>
+                                        <td >{row.character}</td>
+                                        <td >{row.nameGift}</td>
+                                        <td >{row.status}</td>
+                                        <td>
+                                            <Button className="mr10" onClick={() => dialog(i)}>
+                                                <DeleteOutlineIcon />
+                                            </Button>
+                                        </td>
+                                        <td>
+                                                                                   {showConfirm &&
+                                            <Dialog
+                                                open={showConfirm}
+                                                onClose={handleNo}
+                                                aria-labelledby="alert-dialog-title"
+                                                aria-describedby="alert-dialog-description"
+                                            >
+                                                <DialogTitle id="alert-dialog-title">
+                                                    {"Confirm Delete"}
+                                                </DialogTitle>
+                                                <DialogContent>
+                                                    <DialogContentText id="alert-dialog-description">
+                                                        Are you sure to delete
+                                                    </DialogContentText>
+                                                </DialogContent>
+                                                <DialogActions>
+                                                    <Button
+                                                        onClick={() => handleRemoveClick(i)}
+                                                        color="primary"
+                                                        autoFocus
+                                                    >
+                                                        Yes
+                                                    </Button>
+                                                    <Button
+                                                        onClick={handleNo}
+                                                        color="primary"
+                                                        autoFocus
+                                                    >
+                                                        No
+                                                    </Button>
+                                                </DialogActions>
+                                            </Dialog>
+                                        }
+                                        </td>
+ 
 
-                                        <Dialog
-                                            open={showConfirm}
-                                            onClose={handleNo}
-                                            aria-labelledby="alert-dialog-title"
-                                            aria-describedby="alert-dialog-description"
-                                        >
-                                            <DialogTitle id="alert-dialog-title">
-                                                {"Confirm Delete"}
-                                            </DialogTitle>
-                                            <DialogContent>
-                                                <DialogContentText id="alert-dialog-description">
-                                                    Are you sure to delete
-</DialogContentText>
-                                            </DialogContent>
-                                            <DialogActions>
-                                                <Button
-                                                    onClick={() => handleRemoveClick(i)}
-                                                    color="primary"
-                                                    autoFocus
-                                                >
-                                                    Yes
-</Button>
-                                                <Button
-                                                    onClick={handleNo}
-                                                    color="primary"
-                                                    autoFocus
-                                                >
-                                                    No
-</Button>
-                                            </DialogActions>
-                                        </Dialog>
-                                    }
-
-                                    {/* component="th" scope="row" */}
-                                    {/* <TableCell >
+                                        {/* component="th" scope="row" */}
+                                        {/* <TableCell >
                                                             {row.remark}
                                                         </TableCell>
                                                                                                                                          <TableCell >
@@ -174,11 +172,12 @@ function DetailsGitUser(props) {
                                                                 {row.status}
                                                             </TableCell> */}
 
-                                </div>
-                            }
-                        </tr>
-                    );
-                }) : []}
+                                    {/* </div> */}
+                                
+                            </tr>
+                        );
+                    }) : []}
+            </tbody>
         </table>
     );
 }
@@ -188,4 +187,52 @@ const myMapToProps = (state) => {
 
     }
 }
-export default connect(myMapToProps, { getGift, deleteGift })(DetailsGitUser); 
+export default connect(myMapToProps, { getGift, deleteGift })(DetailsGitUser);
+
+
+
+// ____________modal from mail why?________________
+// import * as React from 'react';
+// import Box from '@mui/material/Box';
+// import Button from '@mui/material/Button';
+// import Typography from '@mui/material/Typography';
+// import Modal from '@mui/material/Modal';
+
+// const style = {
+//   position: 'absolute',
+//   top: '50%',
+//   left: '50%',
+//   transform: 'translate(-50%, -50%)',
+//   width: 400,
+//   bgcolor: 'background.paper',
+//   border: '2px solid #000',
+//   boxShadow: 24,
+//   p: 4,
+// };
+
+// export default function BasicModal() {
+//   const [open, setOpen] = React.useState(false);
+//   const handleOpen = () => setOpen(true);
+//   const handleClose = () => setOpen(false);
+
+//   return (
+//     <div>
+//       <Button onClick={handleOpen}>Open modal</Button>
+//       <Modal
+//         open={open}
+//         onClose={handleClose}
+//         aria-labelledby="modal-modal-title"
+//         aria-describedby="modal-modal-description"
+//       >
+//         <Box sx={style}>
+//           <input></input>
+//           <button
+//             onClick={() => {
+//               handleClose;
+//             }}
+//           ></button>
+//         </Box>
+//       </Modal>
+//     </div>
+//   );
+// }

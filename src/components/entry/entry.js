@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import React from 'react'
 import { Button, Divider, Form, Grid, Segment } from 'semantic-ui-react'
-import NewUser from "../newUser/newUser";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import giveGift from './giveGift.png'
 import './entry.scss'
@@ -24,8 +23,9 @@ const Entry = () => {
     //props.postBusinessOwner(newUser);
    
       axios.post("http://localhost:5000/users/entry", newUser).then(succ => { 
-        localStorage.setItem('user', JSON.stringify(succ.data));        
-          alert("קטגוריה התווספה בהצלחה!!!")
+        debugger
+        localStorage.setItem('user', JSON.stringify(succ.data[0]));        
+          alert(" התווספת בהצלחה!!!")
       }).catch(err => { console.log("ההוספה לא הצליחה"); })
     
   }
@@ -52,15 +52,14 @@ const Entry = () => {
 
             />
 
-            <Router>
               <Link to="/NewUser">
 
                 <h4>אין לך חשבון? - הרשמה</h4>
               </Link>
-              <Route path="/NewUser">
+              {/* <Route path="/NewUser">
                 <NewUser></NewUser>
-              </Route>
-              <br></br></Router>
+              </Route> */}
+              <br></br>
             <Button content='כניסה' primary onClick={createUser} />
           </Form>
         </Grid.Column>

@@ -123,7 +123,7 @@
 
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import NewUser from "../newUser/newUser";
+// import NewUser from "../newUser/newUser";
 import User from "../user/user";
 import BusinessOwner from "../businessOwner/businessOwner";
 import SerchByCategory from "../serchByCategory/serchByCategory";

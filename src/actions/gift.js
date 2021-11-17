@@ -9,13 +9,23 @@ export const getAllGift = (gift) => {
 }
 export const getGift = () => {
     return (dispatch) => {
+        let user = JSON.parse(localStorage.getItem("user"));
+        debugger
+        // let id = user._id
+        axios.get("http://localhost:5000/gifts/getByUser/"+user._id,)
+            .then(succ => {
+                dispatch(getAllGift(succ.data))
+            }).catch(err => { debugger; console.log("============this is mistake" + err.message) })
+    }
+}
+export const getGiftsTomanager = () => {
+    return (dispatch) => {
         axios.get("http://localhost:5000/gifts",)
             .then(succ => {
                 dispatch(getAllGift(succ.data))
-            }).catch(err => console.log("============this is mistake" + err.message))
+            }).catch(err => { debugger; console.log("============this is mistake" + err.message) })
     }
 }
-
 export const postAllGift = (gift) => {
     return {
         type: actionTypes.GIFT_ADD,
@@ -38,7 +48,7 @@ export const deleteAllGift = (gift) => {
 }
 export const deleteGift = (gift) => {
     return (dispach) => {
-        axios.delete("http://localhost:5000/gifts/"+gift).then(succ => {
+        axios.delete("http://localhost:5000/gifts/" + gift).then(succ => {
             dispach(deleteAllGift(succ.data))
             alert("מתנה התווסה בהצלחה!!!")
         }).catch(err => { console.log("המחיקה לא הצליחה"); })

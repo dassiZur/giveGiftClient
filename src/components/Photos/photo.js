@@ -108,9 +108,12 @@ import axios from "axios"
         
           axios.post("http://localhost:5000/upload",formData,{}).then(res=>{
             console.log(res.data.path);
-            var bus=JSON.parse( localStorage.getItem("newBuss"));
+            if(localStorage.getItem("newBuss")){
+              var bus=JSON.parse( localStorage.getItem("newBuss"));
             bus.photoAdvertising.push({imageUrl:res.data.path,countShow:0});
             localStorage.setItem("newBuss",JSON.stringify(bus));
+            }
+            
             localStorage.setItem("image",res.data.path);
            // debugger;
            // res.userCreated.profileImg

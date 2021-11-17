@@ -25,8 +25,10 @@ const ShareGift = (props) => {
     const [moveAge, setMoveAge] = React.useState([0, 120]);
     const [movePrice, setMovePrice] = React.useState([0, 1000]);
     const history = useHistory();
-    if (!localStorage.getItem("user"))
+    if (!localStorage.getItem("user")) {
+        debugger
         history.push('/entry');
+    }
 
     let remark = "";
 
@@ -36,14 +38,16 @@ const ShareGift = (props) => {
         let image = localStorage.getItem("image");
         let user = JSON.parse(localStorage.getItem("user"));
         debugger;
-        let newGift = { 
-            "nameGift":nameGift.value,
-        "category":  state.value, 
-        "remark":remark, "user": user._id, "gifPhoto": image,"ageRange":moveAge,"price":movePrice,"character":character.value}
+        let newGift = {
+            "nameGift": nameGift.value,
+            "category": state.value,
+            "remark": remark, "user": user._id, "gifPhoto": image, "ageRange": moveAge, "price": movePrice, "character": character.value
+        }
         axios.post("http://localhost:5000/gifts", newGift).then(succ => {
-            
+
             alert("מתנה התווסה בהצלחה!!!")
-        }).catch(err => { console.log("ההוספה לא הצליחה"); })
+            history.push('try')
+        }).catch(err => {debugger; console.log("ההוספה לא הצליחה"); })
     }
     const handleChange = (e) => {
         console.log("e.target.value")
@@ -84,19 +88,19 @@ const ShareGift = (props) => {
     }
     return (
         <div>
-        
+
             <div>
                 <lable class="picName" > שם תמונה</lable>
-                <input class="input1" type="text" onChange={(e) => { handleNameGift(e)}}></input>
+                <input class="input1" type="text" onChange={(e) => { handleNameGift(e) }}></input>
             </div>
 
             <div>
                 <lable class="picName"> הערות על המתנה</lable>
-                <input class="input1"  onChange={(e) => { remark = e.target.value }}></input>
+                <input class="input1" onChange={(e) => { remark = e.target.value }}></input>
             </div>
-         
+
             <br></br>
-            <lable  class="picName" >בחר\י סוג</lable>
+            <lable class="picName" >בחר\י סוג</lable>
             <select onChange={(e) => { setSubCategory(e) }}>
                 {props.arr.map((item) => {
                     return (
@@ -104,10 +108,10 @@ const ShareGift = (props) => {
                     )
                 })}
             </select>
-            
-                
 
-            <select  onChange={(e) => { handleChange(e) }}>
+
+
+            <select onChange={(e) => { handleChange(e) }}>
                 {
 
                     arrDropDown ? arrDropDown.map((item) => {
@@ -117,7 +121,7 @@ const ShareGift = (props) => {
                         )
                     }) : null}
             </select>
-             
+
 
             <br></br>
             <div>
@@ -153,7 +157,7 @@ const ShareGift = (props) => {
                     <h3>טווח גילאים:</h3>
                     <Typography id="range-slider" gutterBottom>
                         בחר גיל בין טווח הגילאים הבאים:
-</Typography>
+                    </Typography>
                     <Slider
                         value={moveAge}
                         onChange={rangeSelector}
@@ -177,7 +181,7 @@ const ShareGift = (props) => {
                     <h3>טווח מחירים</h3>
                     <Typography id="range-slider" gutterBottom>
                         בחר מחיר בין טווח המחירים הבאים:
-</Typography>
+                    </Typography>
                     <Slider
                         value={movePrice}
                         onChange={rangeSelectorAge}
@@ -191,7 +195,7 @@ const ShareGift = (props) => {
 
             <br></br>
             <ImageUploader></ImageUploader>
-<br></br>
+            <br></br>
 
             <button class="button button1" onClick={handleSubmit}>אישור</button>
         </div>

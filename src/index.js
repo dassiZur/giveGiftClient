@@ -24,7 +24,7 @@ import { createMemoryHistory } from 'history'
 import BusinessOwner from './components/businessOwner/businessOwner'
 import HorizontalNonLinearStepper from './components/bussnessOwnerStep/stepOne';
 import Entry from './components/entry/entry';
-import NewUser from './components/newUser/newUser';
+import NewUser from './components/entry/newUser/newUser';
 import Stores from './components/stores/stores';
 import StoreDetails from './components/stores/storeDetails/storeDetails';
 import SubHeader from './components/greetingCard/subHeader/subHeader'

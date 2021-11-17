@@ -10,10 +10,15 @@ export const addUser = (user) => {
 export const postUser = (user) => {
     return (dispach) => {
         axios.post("http://localhost:5000/users", user).then(succ => {
-        
+            debugger
+            localStorage.setItem('user', JSON.stringify(succ.data));
+
             dispach(addUser(succ.data))
             alert("משתמש חדש התווסף בהצלחה!!!")
-        }).catch(err => { console.log(err.message); })
+        }).catch(err => {
+            alert(err.response.data)
+            console.log(err.response.data);
+        })
     }
 }
 export const postUser1 = (user) => {

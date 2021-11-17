@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import React from 'react'
 import { Button, Divider, Form, Grid, Segment ,Radio} from 'semantic-ui-react'
-import UploadPhotos from '../functions/UploadPhotos';
+import UploadPhotos from '../../functions/UploadPhotos';
 import './newUser'
-import { postUser } from '../../actions/user';
-import DropdownExampleRemote from '../functions/DropdownExampleRemote';
-import giveGift from './giveGift.png'
+import { postUser } from '../../../actions/user';
+// import DropdownExampleRemote from '../../functions/DropdownExampleRemote';
+// import giveGift from './giveGift.png'
 import './newUser.scss'
 
 
@@ -21,7 +21,7 @@ const NewUser = (props) => {
         // let newUser = { username, password, email, phone, role };
 
         props.postUser(newUser);
-        alert("המשתמש נרשם בהצלחה!")
+        // alert("המשתמש נרשם בהצלחה!")
     }
 
 

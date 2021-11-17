@@ -1,5 +1,5 @@
 import businessOwner from "../businessOwner/businessOwner"
-import NewUser from "../newUser/newUser"
+// import NewUser from "../newUser/newUser"
 // import { Link } from 'react-router-dom'
 // import { Route, BrowserRouter as Router } from 'react-router-dom'
 // import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
