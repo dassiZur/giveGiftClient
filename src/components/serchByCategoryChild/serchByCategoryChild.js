@@ -178,6 +178,7 @@ const SerchByCategoryChild = (props) => {
         debugger;
         axios.get(`http://localhost:5000/gifts/getByIdParentCategory/${id} `). then(succ => {                    
             var arrImg = [];
+            debugger;
             succ.data.forEach(element => {
                 let im = "http://localhost:5000/" + element.gifPhoto;
                 arrImg.push({

@@ -35,37 +35,46 @@ const Step1 = (props) => {
       <Grid columns={2} relaxed='very' stackable>
         <Grid.Column>
           <Form>
+            <h1 className="lableP">הכנס פרטי עסק</h1>
+            <br></br>
+            <br></br>
+
             <Form.Input
-              label='שם חנות'
+             
               placeholder='שם חנות'
               type="text"
               onChange={(e) => { bussinesOwner.nameBusinessOwner = e.target.value }}
             />
+                        <br></br>
+
             <Form.Input
-              label='טלפון '
               placeholder='טלפון '
               type='text'
               onChange={(e) => { bussinesOwner.phone = e.target.value }}
             />
+            <br></br>
             <Form.Input
-              label='כתובת'
               placeholder='כתובת'
               type='text'
               onChange={(e) => { bussinesOwner.address = e.target.value }}
             />
+                        <br></br>
+
             <Form.Input
-              label='דואר אלקטרוני'
               placeholder='דואר אלקטרוני'
               type='text'
               onChange={(e) => { bussinesOwner.meil = e.target.value }}
             />
+                        <br></br>
+
             <Form.Input
-              label='שם בעל החנות'
               placeholder='שם בעל החנות'
               type='text'
               onChange={(e) => { bussinesOwner.name = e.target.value }}
             />
           </Form>
+          <br></br>
+
           <Button content='הרשמה' primary onClick={createBussines} />
         </Grid.Column>
         

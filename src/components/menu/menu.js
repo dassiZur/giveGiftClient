@@ -17,6 +17,7 @@ import GreetingCard from "../greetingCard/greetingCard";
 
 
 import './menu.scss';
+
 const Menu = (props) => {
 
     const [arrChildren, setArrChildren] = useState(null);
@@ -71,6 +72,7 @@ const Menu = (props) => {
             </Container>
 
         </Navbar>
+
     );
 }
 

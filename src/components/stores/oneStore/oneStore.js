@@ -18,7 +18,7 @@ const OneStore = (props) => {
             setOnStoreDetails(succ.data)
         });
     }
-    const pirsomot={"marginRight": "450px" ,"textAlign":"left"}
+    const pirsomot = { "marginRight": "450px", "textAlign": "left" }
     useEffect(() => {
         console.log(id)
         props.getBusinessOwner()
@@ -34,14 +34,19 @@ const OneStore = (props) => {
                 return (<>
                     <div key={id._id}>
                         <div className="det">
-                            
-                        <h1 className="h">{obj.nameBusinessOwner}</h1>
-                        <h2 className="h">{obj.phone}</h2>
-                        <h2 className="h">{obj.address}</h2>
-                        <Link to="/Stors/Map" >
-                        <h1 className="oo">למפת הגעה לחנות</h1>
-                        </Link>
-                     
+                            <label className="DetailsLable">שם העסק:</label>
+                            <h1 className="DetailsLable">{obj.nameBusinessOwner}</h1>
+                            <br></br>
+                            <label className="DetailsLable">מספר טלפון:</label>
+                            <h1 className="DetailsLable">{obj.phone}</h1>
+                            <br></br>
+                            <label className="DetailsLable">כתובת:</label>
+                            <h1 className="DetailsLable">{obj.address}</h1>
+                            <br></br>
+                            <Link to="/Stors/Map" >
+                                <h1 className="oo">למפת הגעה לחנות</h1>
+                            </Link>
+
                         </div>
                         <Carousel style={pirsomot}
                             timeout={100}
@@ -55,7 +60,7 @@ const OneStore = (props) => {
                         <StoreDetails></StoreDetails>
                     </div>
                     <div className="gogleMap"></div>
-                    
+
                 </>)
 
             })

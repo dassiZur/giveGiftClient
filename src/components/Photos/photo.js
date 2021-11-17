@@ -13,6 +13,7 @@ import axios from "axios"
   // Component classes
  class ImageUploaderThumbnails extends React.Component {
     render() {
+      debugger;
       let Input = this.props.input || null;
       return (
         <div className="image-thumbnails">
@@ -105,7 +106,7 @@ import axios from "axios"
         {
           const formData=new FormData();
           formData.append('file',file)
-        
+        debugger;
           axios.post("http://localhost:5000/upload",formData,{}).then(res=>{
             console.log(res.data.path);
             var bus=JSON.parse( localStorage.getItem("newBuss"));
