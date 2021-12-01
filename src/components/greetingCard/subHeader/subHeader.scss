@@ -38,5 +38,7 @@
 //     return { arr: state.greetingCardPart.greetingCardArr }
 // }
 // export default connect(myMapToProps, { getGreetingCard })(SubHeader);
-
+.navbar1{
+    background-color: rgb(214, 1, 214) !important;
+}
 

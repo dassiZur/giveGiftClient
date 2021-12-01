@@ -41,3 +41,16 @@
       transform: rotate(135deg);
     -webkit-transform: rotate(135deg);
 }
+
+.fa-angle-right:before {
+    content: "\f138";
+}
+.fa-angle-left:before {
+    content: "\f137";
+}
+.fa-circle-chevron-left:before {
+    content: "\f138";
+}
+.fa {
+    display: contents !important;
+}

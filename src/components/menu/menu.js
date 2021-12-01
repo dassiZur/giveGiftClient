@@ -33,7 +33,7 @@ const Menu = (props) => {
         console.log('The link was clicked.');
     }
     return (
-        <Navbar bg="light" expand="lg" className="navbar">
+        <Navbar bg="light" expand="lg" className="navbarM">
             <Container className="container">
 
                 {/* <Navbar.Brand as={Link} to="/About" className="NavbarBrand" >אודות</Navbar.Brand>   */}

@@ -18,6 +18,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import './detailsGiftUser.scss'
 import { connect } from 'react-redux';
 import { getGift, deleteGift } from '../../actions/gift'
+import { Link } from "react-router-dom";
 // Creating styles
 const useStyles = makeStyles({
     root: {
@@ -41,7 +42,14 @@ const useStyles = makeStyles({
 function DetailsGitUser(props) {
     // Creating style object
     const classes = useStyles();
-    useEffect(() => { props.getGift() }, []);
+    const [isUser, setIsUser] = useState(true);
+
+    useEffect(() => {
+        if (JSON.parse(localStorage.getItem("user")))
+            props.getGift()
+        else
+            setIsUser(false)
+    }, []);
     let user = JSON.parse(localStorage.getItem("user"));
     //get from server all gift that user=user._id
 
@@ -85,7 +93,7 @@ function DetailsGitUser(props) {
         props.arr.filter(p => p._id != props.arr[indexDelete]._id);
         props.getGift()
     };
-    return (
+    return (isUser ?
         <table>
             <thead>
                 <tr>
@@ -108,60 +116,60 @@ function DetailsGitUser(props) {
                     props.arr.map((row, i) => {
                         return (
                             <tr key={i}>
-                                
-                                    {/* <div> */}
-                                    <td><img src={"http://localhost:5000/"+row.gifPhoto} className="imgg" /></td>
-                                        <td>{row.nameGift}</td>
-                                        <td>{row.remark}</td>
-                                        <td >{row.ageRange[0]}-{row.ageRange[1]}</td>
-                                        <td >{row.price[0]}-{row.price[1]}</td>
-                                        <td >{row.character}</td>
-                                        <td >{row.nameGift}</td>
-                                        <td >{row.status}</td>
-                                        <td>
-                                            <Button className="mr10" onClick={() => dialog(i)}>
-                                                <DeleteOutlineIcon />
-                                            </Button>
-                                        </td>
-                                        <td>
-                                                                                   {showConfirm &&
-                                            <Dialog
-                                                open={showConfirm}
-                                                onClose={handleNo}
-                                                aria-labelledby="alert-dialog-title"
-                                                aria-describedby="alert-dialog-description"
-                                            >
-                                                <DialogTitle id="alert-dialog-title">
-                                                    {"Confirm Delete"}
-                                                </DialogTitle>
-                                                <DialogContent>
-                                                    <DialogContentText id="alert-dialog-description">
-                                                        Are you sure to delete
-                                                    </DialogContentText>
-                                                </DialogContent>
-                                                <DialogActions>
-                                                    <Button
-                                                        onClick={() => handleRemoveClick(i)}
-                                                        color="primary"
-                                                        autoFocus
-                                                    >
-                                                        Yes
-                                                    </Button>
-                                                    <Button
-                                                        onClick={handleNo}
-                                                        color="primary"
-                                                        autoFocus
-                                                    >
-                                                        No
-                                                    </Button>
-                                                </DialogActions>
-                                            </Dialog>
-                                        }
-                                        </td>
- 
 
-                                        {/* component="th" scope="row" */}
-                                        {/* <TableCell >
+                                {/* <div> */}
+                                <td><img src={"http://localhost:5000/" + row.gifPhoto} className="imgg" /></td>
+                                <td>{row.nameGift}</td>
+                                <td>{row.remark}</td>
+                                <td >{row.ageRange[0]}-{row.ageRange[1]}</td>
+                                <td >{row.price[0]}-{row.price[1]}</td>
+                                <td >{row.character}</td>
+                                <td >{row.nameGift}</td>
+                                <td >{row.status}</td>
+                                <td>
+                                    <Button className="mr10" onClick={() => dialog(i)}>
+                                        <DeleteOutlineIcon />
+                                    </Button>
+                                </td>
+                                <td>
+                                    {showConfirm &&
+                                        <Dialog
+                                            open={showConfirm}
+                                            onClose={handleNo}
+                                            aria-labelledby="alert-dialog-title"
+                                            aria-describedby="alert-dialog-description"
+                                        >
+                                            <DialogTitle id="alert-dialog-title">
+                                                {"Confirm Delete"}
+                                            </DialogTitle>
+                                            <DialogContent>
+                                                <DialogContentText id="alert-dialog-description">
+                                                    Are you sure to delete
+                                                </DialogContentText>
+                                            </DialogContent>
+                                            <DialogActions>
+                                                <Button
+                                                    onClick={() => handleRemoveClick(i)}
+                                                    color="primary"
+                                                    autoFocus
+                                                >
+                                                    Yes
+                                                </Button>
+                                                <Button
+                                                    onClick={handleNo}
+                                                    color="primary"
+                                                    autoFocus
+                                                >
+                                                    No
+                                                </Button>
+                                            </DialogActions>
+                                        </Dialog>
+                                    }
+                                </td>
+
+
+                                {/* component="th" scope="row" */}
+                                {/* <TableCell >
                                                             {row.remark}
                                                         </TableCell>
                                                                                                                                          <TableCell >
@@ -172,13 +180,17 @@ function DetailsGitUser(props) {
                                                                 {row.status}
                                                             </TableCell> */}
 
-                                    {/* </div> */}
-                                
+                                {/* </div> */}
+
                             </tr>
                         );
                     }) : []}
             </tbody>
-        </table>
+        </table> :
+        <div>
+            אינך מחובר
+            <Link to="entry">להתחברות</Link>
+        </div>
     );
 }
 const myMapToProps = (state) => {

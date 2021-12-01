@@ -128,30 +128,35 @@ const HorizontalNonLinearStepper = (props) => {
       <div>
         {allStepsCompleted() ? (
           <div >
-            <Typography className={classes.instructions+" div2"}>
+            <Typography className={classes.instructions + " div2"}>
               All steps completed - you&apos;re finished
             </Typography>
             <Button onClick={handleReset}>Reset</Button>
           </div>
         ) : (
+          <div>
+            <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
             <div>
-              <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-              <div>
-                <div className="divLink">
-                <Link disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
-                  Back ---
-              </Link>
+              <div className="divLink">
                 <Link
                   variant="contained"
                   color="primary"
                   onClick={handleNext}
                   className={classes.button}
                 >
-                    --- Next
-              </Link>
-                </div>
-             
-                {/* {activeStep !== steps.length &&
+                  {/* <i style="font-size:24px" class="fa">&#xf104;</i> */}
+                  <i class="fa fa-angle-left"></i>
+                   Next
+                </Link>--
+                <Link disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+                  Back
+                  <i class="fa fa-angle-right"></i>
+                </Link>
+
+
+              </div>
+
+              {/* {activeStep !== steps.length &&
                   (completed[activeStep] ? (
                     <Typography variant="caption" className={classes.completed}>
                       Step {activeStep + 1} already completed
@@ -162,15 +167,15 @@ const HorizontalNonLinearStepper = (props) => {
                       </Button>
                     ))} */}
 
-                {activeStep !== steps.length &&
-                  (completed[activeStep] ? (
-                    <Typography variant="caption" className={classes.completed}>
-                      Step {activeStep + 1} already completed
+              {activeStep !== steps.length &&
+                (completed[activeStep] ? (
+                  <Typography variant="caption" className={classes.completed}>
+                    Step {activeStep + 1} already completed
                   </Typography>
-                  ) : null)}
-              </div>
+                ) : null)}
             </div>
-          )}
+          </div>
+        )}
       </div>
     </div>
   );

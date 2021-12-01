@@ -35,8 +35,8 @@ body {
   }
   
   .image-uploader {
-    width: 420px;
-    margin: 40px 0;
+    // width: 420px;
+    // margin: 40px 0;
   }
   
   .image-uploader-container {
@@ -106,6 +106,7 @@ body {
   .image-thumbnails {
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
   }
   
   .image-thumbnail {

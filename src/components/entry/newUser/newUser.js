@@ -7,6 +7,7 @@ import { postUser } from '../../../actions/user';
 // import DropdownExampleRemote from '../../functions/DropdownExampleRemote';
 // import giveGift from './giveGift.png'
 import './newUser.scss'
+import { useHistory } from 'react-router';
 
 
 const NewUser = (props) => {
@@ -16,11 +17,13 @@ const NewUser = (props) => {
     let email;
     let phone;
     let role;
+    const history = useHistory();
+
     const createUser = () => {
         let newUser = { username, password, email, phone };
         // let newUser = { username, password, email, phone, role };
 
-        props.postUser(newUser);
+        props.postUser(newUser).then(()=>history.push('/Try'));
         // alert("המשתמש נרשם בהצלחה!")
     }
 

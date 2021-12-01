@@ -19,14 +19,14 @@ const Entry = () => {
     let newUser = { "username": nameUser, "password": password };
     //check in server
     
-    history.push('/Try');
     //props.postBusinessOwner(newUser);
    
       axios.post("http://localhost:5000/users/entry", newUser).then(succ => { 
         debugger
-        localStorage.setItem('user', JSON.stringify(succ.data[0]));        
+        localStorage.setItem('user', JSON.stringify(succ.data));        
           alert(" התווספת בהצלחה!!!")
-      }).catch(err => { console.log("ההוספה לא הצליחה"); })
+          history.push('/Try');
+        }).catch(err => {alert(err.response.data); console.log("ההוספה לא הצליחה"); })
     
   }
   return (<div className="DivAll">

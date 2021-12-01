@@ -10,18 +10,20 @@ import axios from "axios"
 import Logo from '../../logo/logo';
 import Entry from '../../entry/entry';
 import GreetingCard from '../greetingCard';
-
+import './subHeader.scss'
 
 
 const SubHeader = (props) => {
 
     const [arrChildren, setArrChildren] = useState(null);
-    var item1 = "";
+    const [item1, setitem1] = useState("");
+    // var item1 = "";
     const { url, path } = useRouteMatch();
     const url1=url+"s";
     console.log(path);
     const func = (x) => {
-        item1 = x;
+   debugger
+        setitem1(x) ;
     }
     useEffect(() => {
         // props.getGreetingCard();
@@ -33,12 +35,12 @@ const SubHeader = (props) => {
 
     }, [])
     return (<>
-        <Navbar bg="light" expand="lg" className="navbar">
+        <Navbar bg="light" expand="lg" className="navbar1">
             <Container className="container">
                 <Nav className="me-auto">
                     {arrChildren && arrChildren.map((item, index) => {
                         return (<div key={index}>
-                            <Nav.Link href={`/${url.substring(1,13)+"s"}/${item}`} onClick={() => {
+                            <Nav.Link  as={Link} to={`/${url.substring(1,13)+"s"}/${item}`} onClick={() => {
                                 func(item);
                             }}  >
                                 {item}

@@ -18,8 +18,8 @@ export const postBusinessOwner = (businessOwner) => {
     return (dispach) => {
         axios.post("http://localhost:5000/businessOwners", businessOwner).then(succ => {
             localStorage.setItem("newBuss",JSON.stringify(succ.data));
-            dispach(updBusinessOwner(succ.data))
-            alert("בעל העסק התווסף בהצלחה!!!")
+            dispach(addBusinessOwner(succ.data))
+            // alert("בעל העסק התווסף בהצלחה!!!")
         }).catch(err => { console.log("ההוספה לא הצליחה"); })
     }
 }
@@ -28,8 +28,8 @@ export const updateBusinessOwner = (businessOwner) => {
     return (dispach) => {
         axios.put("http://localhost:5000/businessOwners", businessOwner).then(succ => {
             localStorage.setItem("newBuss",JSON.stringify(succ.data));
-            dispach(addBusinessOwner(succ.data))
-            alert("בעל העסק עודכן בהצלחה!!!")
+            dispach(updBusinessOwner(succ.data))
+            // alert("בעל העסק עודכן בהצלחה!!!")
         }).catch(err => { console.log("העדכון לא הצליח"); })
     }
 }

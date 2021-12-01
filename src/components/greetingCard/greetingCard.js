@@ -10,6 +10,8 @@ import SubHeader from "./subHeader/subHeader";
 import serchByCategoryChild from "../serchByCategoryChild/serchByCategoryChild";
 import axios from "axios"
 
+import './greetingCard.scss'
+
 const GreetingCard = (props) => {
     const [arrGreetingCardsById, setGreetingCardsById] = useState(null);
     const { id } = useParams();
@@ -22,11 +24,10 @@ const GreetingCard = (props) => {
         console.log("jjjjjj0----- "+id)
         props.getGreetingCard()
         funcGetById(id);
-    }
-        , [])
+    }, [props.category])
     console.log("oooooooooooo")
    
-    return (<><Router >
+    return (<>
          { id?    
         <div>
             {arrGreetingCardsById&&arrGreetingCardsById.map((obj) => {
@@ -35,8 +36,8 @@ const GreetingCard = (props) => {
                 console.log("item.path+  " + obj.path)
            
                     return (<>
-                        <div key={id._id}>
-                            <img src={im}></img>
+                        <div key={id._id} className='cardiv'>
+                            <img className="imgCards" src={im}></img>
                         </div></>)
 
             })
@@ -55,7 +56,7 @@ const GreetingCard = (props) => {
            })}
         </div>}
 
-    </Router></>
+    </>
     );
 }
 

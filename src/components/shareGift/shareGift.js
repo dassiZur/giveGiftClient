@@ -25,10 +25,16 @@ const ShareGift = (props) => {
     const [moveAge, setMoveAge] = React.useState([0, 120]);
     const [movePrice, setMovePrice] = React.useState([0, 1000]);
     const history = useHistory();
-    if (!localStorage.getItem("user")) {
-        debugger
-        history.push('/entry');
-    }
+    // if (!localStorage.getItem("user")) {
+        
+    //     // history.push('/entry');
+    // }
+    const [isUser, setIsUser] = useState(true);
+
+    useEffect(() => { 
+        if(!JSON.parse(localStorage.getItem("user")))
+            setIsUser(false)
+    },[])
 
     let remark = "";
 
@@ -88,6 +94,7 @@ const ShareGift = (props) => {
     }
 
     return (
+        isUser?
         <div className="allDiv">
 
             <h1 className="h1Upload">טופס למילוי הוספת תמונת מתנה לאתר</h1>
@@ -199,6 +206,10 @@ const ShareGift = (props) => {
             <br></br>
 
             <button class="button button1" onClick={handleSubmit}>אישור</button>
+        </div>:
+            <div>
+            אינך מחובר
+            <Link to="entry">להתחברות</Link>
         </div>
 
 
