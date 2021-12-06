@@ -32,7 +32,7 @@ const OneStore = (props) => {
                 console.log("obj.nameBu----------------------sinessOwner")
                 console.log(obj.nameBusinessOwner)
                 return (<>
-                    <div key={id._id}>
+                    <div key={id._id} style={{paddingBottom:'2%'}}>
                         <div className="det">
                             <label className="DetailsLable">שם העסק:</label>
                             <h1 className="DetailsLable">{obj.nameBusinessOwner}</h1>
@@ -43,21 +43,26 @@ const OneStore = (props) => {
                             <label className="DetailsLable">כתובת:</label>
                             <h1 className="DetailsLable">{obj.address}</h1>
                             <br></br>
-                            <Link to="/Stors/Map" >
+                            {/* <Link to="/Stors/Map" >
                                 <h1 className="oo">למפת הגעה לחנות</h1>
-                            </Link>
+                            </Link> */}
 
                         </div>
-                        <Carousel style={pirsomot}
-                            timeout={100}
-                            animation={"slide"}
-                            cycleNavigation={true}>
-                            {obj.photoAdvertising.map((img, i) => {
-                                let im = "http://localhost:5000/" + img.imageUrl;
-                                return <img className="myimg" key={i} src={im}></img>
-                            })}
-                        </Carousel>
-                        <StoreDetails></StoreDetails>
+                        <div className="det">
+                            <Carousel style={pirsomot}
+                                timeout={100}
+                                animation={"slide"}
+                                cycleNavigation={true}>
+                                {obj.photoAdvertising.map((img, i) => {
+                                    let im = "http://localhost:5000/" + img.imageUrl;
+                                    return <img className="carusel-myimg" key={i} src={im}></img>
+                                })}
+                            </Carousel>
+                        </div>
+                        <div className="det">
+                            <StoreDetails></StoreDetails>
+                        </div>
+
                     </div>
                     <div className="gogleMap"></div>
 

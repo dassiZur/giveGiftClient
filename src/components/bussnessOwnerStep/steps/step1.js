@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import React from 'react'
-import { Button, Divider, Form, Grid, Segment } from 'semantic-ui-react'
+import { Button, Divider, Form, Grid, Select } from 'semantic-ui-react'
 import { postBusinessOwner } from '../../../actions/businessOwner';
 // import NewUser from "../newUser/newUser";
 import './step1.scss';
@@ -12,8 +12,10 @@ let bussinesOwner = {
   nameBusinessOwner: '',
   phone: '',
   address: '',
-  mail:'',
-  name:'',
+  meil: '',
+  name: '',
+  logo: '',
+  area: 'מרכז',
   payments: [],
   photoAdvertising: [],
   categories: [],
@@ -28,6 +30,7 @@ const Step1 = (props) => {
     props.postBusinessOwner(bussinesOwner);
     alert("המשתמש נרשם בהצלחה!")
   }
+  const op = ['מרכז', 'ירושלים', 'דרום', 'צפון', 'חיפה', 'תל אביב']
 
 
   return (<div className="DivAll">
@@ -40,12 +43,12 @@ const Step1 = (props) => {
             <br></br>
 
             <Form.Input
-             
+
               placeholder='שם חנות'
               type="text"
               onChange={(e) => { bussinesOwner.nameBusinessOwner = e.target.value }}
             />
-                        <br></br>
+            <br></br>
 
             <Form.Input
               placeholder='טלפון '
@@ -53,19 +56,33 @@ const Step1 = (props) => {
               onChange={(e) => { bussinesOwner.phone = e.target.value }}
             />
             <br></br>
+            {/* <Form.Field control={Select}
+              placeholder='מרכז'
+              options={[{ key: 'af3', value: 'af3', text: 'בב' },{ key: 'af2', value: 'af2', text: 'ים' },{ key: 'af1', value: 'af1', text: 'תא' }]}
+              // onChange={(e) => { bussinesOwner.area = e.target.value }}
+            /> */}
+            <select onChange={(e) => { bussinesOwner.area = e.target.value }}>
+              {op.map((item, index) => {
+                return (
+                  <option value={item} key={index}>{item}</option>
+                )
+              })}
+            </select>
+            <br></br>
+
             <Form.Input
               placeholder='כתובת'
               type='text'
               onChange={(e) => { bussinesOwner.address = e.target.value }}
             />
-                        <br></br>
+            <br></br>
 
             <Form.Input
               placeholder='דואר אלקטרוני'
               type='text'
               onChange={(e) => { bussinesOwner.meil = e.target.value }}
             />
-                        <br></br>
+            <br></br>
 
             <Form.Input
               placeholder='שם בעל החנות'
@@ -77,8 +94,8 @@ const Step1 = (props) => {
 
           <Button content='הרשמה' primary onClick={createBussines} />
         </Grid.Column>
-        
-        
+
+
       </Grid>
     </div>
   </div>

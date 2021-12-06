@@ -1,35 +1,112 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { getBusinessOwner } from "../../actions/businessOwner";
-import BusinessOwner from "../businessOwner/businessOwner";
 import { connect } from "react-redux";
-import Carousel from 'react-material-ui-carousel'
-import { Paper, Button } from '@material-ui/core'
 import "./stores.scss";
-import OneStore from "./oneStore/oneStore";
+import { Checkbox } from "@material-ui/core";
 
 const Store = (props) => {
     useEffect(() => { props.getBusinessOwner() }, [])
-    var item1 = "";
-    const func = (x) => {
-        item1 = x;
+    const areaList = ['מרכז', 'ירושלים', 'דרום', 'צפון', 'חיפה', 'תל אביב']
+    const [areaArr, setAreaArr] = useState([]);
+    const [stores, setStores] = useState([]);
+    useEffect(() => {
+        // if (areaArr.length==0 )
+        //     setStores(...props.arr)
+        // else{
+        //     let u= props.arr.filter((st)=>{return areaArr.includes(st.area) })
+        //     setStores(u)
+        // }
+        submitFilter()
+    }, [props.arr])
+
+    function chechedArea(areaName) {
+        if(areaArr.includes(areaName)){
+        //    let arry = areaArr.filter(item => item !== areaName)
+           setAreaArr(areaArr.filter(item => item !== areaName))
+        }
+        else
+        setAreaArr([...areaArr, areaName])
+    }
+    function submitFilter() {
+        if (areaArr == [] || areaArr.length == 0 || areaArr == undefined) {
+            setStores(props.arr)
+        }
+        else {
+            let u= props.arr.filter((st)=>{return areaArr.includes(st.area) })
+            // let u = props.arr.map((st) => { return areaArr.includes(st.area) && st })
+            setStores(u)
+        }
     }
     return (<>
-        <div>
-            <h1>רשימת החניות</h1>
-            {props.arr.map((item) => {
-                return (<div key={item._id}>
-                    <Link  to={`/Stores/${item.nameBusinessOwner}`} onClick={() => {
-                        func(item);
-                    }}  >
-                        {item.nameBusinessOwner}
-                    </Link>
-{/*                   
+        <div className="container-fluid">
+            <div className="row">
+                <h1 style={{ fontFamily: 'inherit', paddingTop: '2%' }}>חנויות בכל הארץ</h1>
+            </div>
+            <div className="row">
+                <div className="col-md-3">
+                    <div className="cardd">
+                        <h4>סינון אזור</h4>
+                        {/* <Checkbox /> */}
+                        {areaList.map((item, index) => {
+                            return (<>
+                                <input type="checkbox" id={"cb" + index} value={item} onChange={(e) => chechedArea(item)} />
+                                <label htmlFor={"cb" + index}>{item}</label>
+                                <br />
+                            </>)
+                        })}
+                        <button onClick={submitFilter}>סנן</button>
+                        {/* <input type="checkbox" id="cb1" value="" />
+                        <label htmlFor="cb1"> I have a bike</label> */}
+                    </div>
+                </div>
+                <div className="col-md-7">
+                    {stores.map((item) => {
+                        return (
+                            <div className="card-Store-Item" key={item._id}>
+                                <Link to={`/Stores/${item.nameBusinessOwner}`} >
+                                    <h3> {item.nameBusinessOwner}</h3>
+                                </Link>
+                                <h4> {item.address}</h4>
+                                <h4> {item.phone}</h4>
+                            </div>
+                        )
+                    })}
+                </div>
+            </div>
+
+            {/* {props.arr.map((item) => {
+                return (
+                    <div className="card-Store-Item" key={item._id}>
+                        <Link to={`/Stores/${item.nameBusinessOwner}`} >
+                            <h3> {item.nameBusinessOwner}</h3>
+                        </Link>
+                        <h4> {item.address}</h4>
+                        <h4> {item.phone}</h4>
+                    </div>
+                )
+            })} */}
+        </div>
+    </>
+    );
+}
+
+const myMapToProps = (state) => {
+    return { arr: state.businessOwnerPart.businessOwnerArr }
+}
+export default connect(myMapToProps, { getBusinessOwner })(Store);
+
+//         {/* <OneStore getOneStore={item1}></OneStore> */}
+{/*   
+            // var item1 = "";
+    // const func = (x) => {
+    //     item1 = x;
+    // }                
                         <Route  path={`/Stores/${item.nameBusinessOwner}`} >
                                 <OneStore getOneStore={item1}></OneStore>
                         </Route> */}
-                
-                    {/* <Carousel 
+
+{/* <Carousel 
                     timeout={100}
                     animation={"slide"}
                     cycleNavigation={true}>
@@ -38,20 +115,3 @@ const Store = (props) => {
                             return <img className="myimg" key={i} src={im}></img>
                         })}
                     </Carousel> */}
-                </div>)
-
-            })}
-        </div>
-     {/* <OneStore getOneStore={item1}></OneStore> */}
-    </>
-
-    );
-
-}
-
-
-const myMapToProps = (state) => {
-    return { arr: state.businessOwnerPart.businessOwnerArr }
-}
-export default connect(myMapToProps, { getBusinessOwner })(Store);
-

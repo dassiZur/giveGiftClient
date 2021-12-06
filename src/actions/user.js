@@ -16,7 +16,7 @@ export const postUser = (user) => {
                 localStorage.setItem('user', JSON.stringify(succ.data));
 
                 dispach(addUser(succ.data))
-                alert("משתמש חדש התווסף בהצלחה!!!")
+                // alert("משתמש חדש התווסף בהצלחה!!!")
                 resolve();
             }).catch(err => {
                 alert(err.response.data)

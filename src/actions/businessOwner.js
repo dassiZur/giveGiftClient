@@ -20,7 +20,8 @@ export const postBusinessOwner = (businessOwner) => {
             localStorage.setItem("newBuss",JSON.stringify(succ.data));
             dispach(addBusinessOwner(succ.data))
             // alert("בעל העסק התווסף בהצלחה!!!")
-        }).catch(err => { console.log("ההוספה לא הצליחה"); })
+        }).catch(err => { 
+            console.log("ההוספה לא הצליחה"); })
     }
 }
 

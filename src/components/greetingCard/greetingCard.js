@@ -36,7 +36,7 @@ const GreetingCard = (props) => {
                 console.log("item.path+  " + obj.path)
            
                     return (<>
-                        <div key={id._id} className='cardiv'>
+                        <div key={obj._id} className='cardiv'>
                             <img className="imgCards" src={im}></img>
                         </div></>)
 
@@ -49,7 +49,7 @@ const GreetingCard = (props) => {
                console.log("item.path+  " + obj.path)
           
                    return (
-                       <div >
+                       <div key={obj._id} className='cardiv'>
                            <img className="imgCards" src={im}></img>
                        </div>)
 

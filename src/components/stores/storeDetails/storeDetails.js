@@ -33,8 +33,9 @@ const StoreDetails = (props) => {
 
 
 
-    return (<>{Cenetr && Zoom && Txt && <MyLocation center={Cenetr} zoom={Zoom} txt={Txt} />}
-
+    return (<>
+    <h4>מפות גוגל</h4>
+    {Cenetr && Zoom && Txt && <MyLocation center={Cenetr} zoom={Zoom} txt={Txt} />}
     </>);
 }
 
