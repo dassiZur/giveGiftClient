@@ -69,6 +69,7 @@ const Step1 = (props) => {
               })}
             </select>
             <br></br>
+            <br></br>
 
             <Form.Input
               placeholder='כתובת'

@@ -1,20 +1,28 @@
 .h1Upload{
     color: #81005F;
 margin-top: 60px;
+margin-bottom: 6%;
 }
 .divBefor{
-    margin-top: -88px;
+    // margin-top: -88px;
 
 }
 .allDiv {
     background-color: white;
     width: 884px;
-    height: 500px;
-    /* margin-left: 136px; */
-    margin-right: 370px;
+    margin:auto;
     margin-top: 43px;
-    height: 1195px;
+    height: auto;
+    padding-bottom: 3%;
+    text-align: center;
+    margin-bottom: 3%;
 }
+.allDiv .ui{
+    margin: auto;
+}
+.allDiv .ui *{
+    margin: auto;
+} 
 .MuiSlider-root {
     color:#81005F;
     width: 100%;
@@ -63,16 +71,18 @@ margin-top: 60px;
 .picName {
     display: inline-block;
     color: #81005F;
-    margin-right: 83px;
+    font-size: 24px;
+    line-height: 2.5;
+    // margin-right: 83px;
     /* margin-top: 102px; */
-    font-size: 27px;
+
     /* display: block; */
 }
 .picName2 {
     display: inline-block;
     color: #81005F;
-    margin-right: -39px;
-    margin-top: 150px;
+    // margin-right: -39px;
+    // margin-top: 150px;
     font-size: 27px;
     /* display: block; */
 }.comment {
@@ -122,4 +132,13 @@ button, input, optgroup, select, textarea {
     line-height: -117.85;
     margin: 0;
     display: inline-block;
+}
+.nologed{
+    margin: 5%;;
+    padding: 2%;;
+}
+.formo{
+    height: auto;
+    margin: auto;
+
 }

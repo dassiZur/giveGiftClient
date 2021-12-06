@@ -48,6 +48,7 @@ const Store = (props) => {
                     <div className="cardd">
                         <h4>סינון אזור</h4>
                         {/* <Checkbox /> */}
+                        <div className="area-list">
                         {areaList.map((item, index) => {
                             return (<>
                                 <input type="checkbox" id={"cb" + index} value={item} onChange={(e) => chechedArea(item)} />
@@ -55,6 +56,7 @@ const Store = (props) => {
                                 <br />
                             </>)
                         })}
+                        </div>
                         <button onClick={submitFilter}>סנן</button>
                         {/* <input type="checkbox" id="cb1" value="" />
                         <label htmlFor="cb1"> I have a bike</label> */}

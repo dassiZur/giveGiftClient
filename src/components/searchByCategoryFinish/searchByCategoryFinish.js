@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Switch, Route, Link, useParams } from "react-r
 import { getCategory } from "../../actions/category";
 import { connect } from "react-redux";
 import axios from "axios"
-import Gallery from 'react-grid-gallery';
+import Gallery from '../search/gallery';
 
 import { expressionStatement } from "@babel/types";
 import './searchByCategoryFinish.scss'
@@ -50,9 +50,10 @@ const SerchByCategoryChildFinish = (props) => {
         GetGiftsByCategoryId();
     }, []);
     return (<>
-        {giftsArr &&
+        {giftsArr&&giftsArr.length ?
 
-            <Gallery images={giftsArr} showLightboxThumbnails={true} />
+            <Gallery giftsArr={giftsArr} />:
+            <h2>לא קיימות מתנות בקטגוריה זו</h2>
 
             //         giftsArr.map((item, index) =>
             //             {

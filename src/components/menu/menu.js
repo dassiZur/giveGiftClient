@@ -38,13 +38,13 @@ const Menu = (props) => {
 
                 {/* <Navbar.Brand as={Link} to="/About" className="NavbarBrand" >אודות</Navbar.Brand>   */}
                 <Nav className="me-auto">
-                    <Nav.Link as={Link} to="/About" >אודות</Nav.Link>
+                    <Nav.Link as={Link} to="/About"  style={{border:'none'}}>אודות</Nav.Link>
                     <Nav.Link as={Link} to="/getStepContent" >בעלי עסקים לפרסומות</Nav.Link>
                     {/* <Nav.Link as={Link} to="/ExactSerarch">חיפוש מדויק</Nav.Link> */}
                     <Nav.Link as={Link} to="/greetingCard">כרטיסי ברכה</Nav.Link>
                     <Nav.Link as={Link} to="/Store">חנויות</Nav.Link>
                     <Nav.Link as={Link} to="/ShareGift">שתפו במתנה</Nav.Link>
-                    <Nav.Link as={Link} to="/Try">try</Nav.Link>
+                    <Nav.Link as={Link} to="/MyShare">MyShare</Nav.Link>
                     <Nav.Link as={Link} to="/ChoseCategories">
                     בחירת קטגוריה
                     </Nav.Link>

@@ -159,7 +159,7 @@ import { connect } from "react-redux";
 import axios from "axios"
 import { expressionStatement } from "@babel/types";
 import './serchByCategoryChild.scss'
-import Gallery from 'react-grid-gallery';
+import Gallery from '../search/gallery';
 
 const SerchByCategoryChild = (props) => {
     const { id } = useParams();
@@ -176,51 +176,48 @@ const SerchByCategoryChild = (props) => {
     const [giftsArr, setGiftsArr] = useState([]);
     const getAllImag = () => {
         debugger;
-        axios.get(`http://localhost:5000/gifts/getByIdParentCategory/${id} `). then(succ => {                    
+        axios.get(`http://localhost:5000/gifts/getByIdCategory/${id}`).then(succ => {
             var arrImg = [];
             debugger;
             succ.data.forEach(element => {
                 let im = "http://localhost:5000/" + element.gifPhoto;
                 arrImg.push({
                     src: im,
-                     thumbnail: im,
+                    thumbnail: im,
                     thumbnailWidth: 320,
                     thumbnailHeight: 212,
                     caption: element.nameGift
                 })
             });
             setGiftsArr(arrImg);
-        });
+        }).catch(err => { debugger; console.log(err.response); });
     }
     useEffect(() => {
         //props.getCategory() 
-        GetAllCategoriesChild(id);getAllImag()
+        GetAllCategoriesChild(id); getAllImag()
     }, [])
     return (<div>
 
-        <Router>
-            <div>
-                {console.log(arr)}
-                {console.log("dddddddddddddddddddddddd")}
+        <div>
+            {console.log(arr)}
+            {console.log("dddddddddddddddddddddddd")}
 
 
-                {arr ? arr.map((item) => {
-                    return (<div key={item._id}>
+            {arr && arr.map((item) => {
+                return (<div key={item._id}>
 
-                        <NavDropdown.Item href={`/ChoseCategoryFinish/${item._id} `}>
-                            {item.nameCategory}
-                        </NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to={`/ChoseCategoryFinish/${item._id} `}>
+                        {item.nameCategory}
+                    </NavDropdown.Item>
 
-                        <Switch>
-                            <Route path={{ pathname: `/ChoseCategoryFinish/${item._id} ` }}>  </Route>
-                        </Switch>
-                    </div>)
-                }) : null}
-            </div>
-        </Router>
-        {giftsArr &&
-<Gallery images={giftsArr} showLightboxThumbnails={true} />
-}
+                    <Route path={{ pathname: `/ChoseCategoryFinish/${item._id} ` }}>  </Route>
+                </div>)
+            })}
+        </div>
+        {giftsArr ?
+            <Gallery giftsArr={giftsArr} /> :
+            <h2>לא קיימות מתנות בקטגוריה זו</h2>
+        }
     </div>
     );
 }

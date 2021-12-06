@@ -25,7 +25,7 @@ const Entry = () => {
         debugger
         localStorage.setItem('user', JSON.stringify(succ.data));        
           alert(" התווספת בהצלחה!!!")
-          history.push('/Try');
+          history.push('/MyShare');
         }).catch(err => {alert(err.response.data); console.log("ההוספה לא הצליחה"); })
     
   }

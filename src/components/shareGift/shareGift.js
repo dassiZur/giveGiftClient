@@ -9,11 +9,11 @@ import axios from "axios"
 import serchByCategoryChild from "../serchByCategoryChild/serchByCategoryChild";
 import { postGift } from '../../actions/gift';
 import { useHistory } from "react-router-dom";
-import { Select, Input } from 'semantic-ui-react'
+import { Select, Input, Form } from 'semantic-ui-react'
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import UploadPhotos from "../functions/UploadPhotos";
-import PhotoSearch from "../search/photoSearch";
+// import PhotoSearch from "../search/photoSearch";
 import ImageUploader from "../Photos/photo";
 
 const ShareGift = (props) => {
@@ -26,15 +26,15 @@ const ShareGift = (props) => {
     const [movePrice, setMovePrice] = React.useState([0, 1000]);
     const history = useHistory();
     // if (!localStorage.getItem("user")) {
-        
+
     //     // history.push('/entry');
     // }
     const [isUser, setIsUser] = useState(true);
 
-    useEffect(() => { 
-        if(!JSON.parse(localStorage.getItem("user")))
+    useEffect(() => {
+        if (!JSON.parse(localStorage.getItem("user")))
             setIsUser(false)
-    },[])
+    }, [])
 
     let remark = "";
 
@@ -52,7 +52,7 @@ const ShareGift = (props) => {
         axios.post("http://localhost:5000/gifts", newGift).then(succ => {
 
             alert("מתנה התווסה בהצלחה!!!")
-            history.push('try')
+            history.push('MyShare')
         }).catch(err => { debugger; console.log("ההוספה לא הצליחה"); })
     }
     const handleChange = (e) => {
@@ -94,123 +94,161 @@ const ShareGift = (props) => {
     }
 
     return (
-        isUser?
-        <div className="allDiv">
+        isUser ?<>
+            <div className="allDiv">
+                <h1 className="h1Upload">טופס למילוי הוספת תמונת מתנה לאתר</h1>
+                <Form className="formo">
 
-            <h1 className="h1Upload">טופס למילוי הוספת תמונת מתנה לאתר</h1>
-            <div className="divBefor">
-                <lable class="picName2" > שם תמונה</lable>
-                <input class="input2" type="text" onChange={(e) => { handleNameGift(e) }}></input>
+                    <Form.Input
+                        placeholder='שם מתנה'
+                        type="text"
+                        onChange={(e) => { handleNameGift(e) }}
+                    />
+                    <br />
+                    <Form.Input
+                        placeholder='הערות על המתנה'
+                        type="text"
+                        onChange={(e) => { remark = e.target.value }}
+                    />
+                    <br />
+                    <label className="picName">בחר\י קטגוריה</label>
 
-                <lable class="picName"> הערות על המתנה</lable>
-                <input class="input1" onChange={(e) => { remark = e.target.value }}></input>
-            </div>
+                    <select placeholder="בחר קטגוריה" onChange={(e) => { setSubCategory(e) }}>
+                        {props.arr.map((item) => {
+                            return (
+                                <option value={item._id} key={item._id}>{item.nameCategory}</option>
+                            )
+                        })}
+                    </select>
+                    <br />
+                    <br />
+                    <select onChange={(e) => { handleChange(e) }} placeholder="בחר תת קטגוריה">
+                        {
 
-            <br></br>
-            <lable class="picName" >בחר\י סוג</lable>
-            <select onChange={(e) => { setSubCategory(e) }}>
-                {props.arr.map((item) => {
-                    return (
-                        <option value={item._id} key={item._id}>{item.nameCategory}</option>
-                    )
-                })}
-            </select>
+                            arrDropDown ? arrDropDown.map((item) => {
+                                return (
+                                    <option value={item._id} key={item._id}>{item.nameCategory}</option>
 
+                                )
+                            }) : null}
+                    </select>
+                    <br />
 
+                    <label className="picName"> בחר\י אופי</label>
+                    <select onChange={(e) => { handleChangeCharacter(e) }}>
+                        <option value={"ביישן"}>ביישן </option>
+                        <option value={"שקט"}>שקט</option>
+                        <option value={"חברותי"}>חברותי</option>
+                        <option value={"רועש"}>רועש</option>
+                    </select>
+                    <br />
+                    <br />
 
-            <select onChange={(e) => { handleChange(e) }}>
-                {
+                </Form>
+                {/* <div className="divBefor">
+                    <label className="picName" >שם מתנה</label>
+                    <input className="input2" type="text" onChange={(e) => { handleNameGift(e) }}></input>
+                    <br />
+                    <label className="picName"> הערות על המתנה</label>
+                    <input className="input1" onChange={(e) => { remark = e.target.value }}></input>
+                </div> */}
 
-                    arrDropDown ? arrDropDown.map((item) => {
+                {/* <label className="picName">בחר\י סוג</label>
+                <select>
+                    {props.arr.map((item) => {
                         return (
                             <option value={item._id} key={item._id}>{item.nameCategory}</option>
-
                         )
-                    }) : null}
-            </select>
-
-
-            <br></br>
-            <div>
-
-                <lable class="picName"> בחר\י אופי</lable>
-                <select onChange={(e) => { handleChangeCharacter(e) }}>
-                    <option value={"ביישן"}>ביישן </option>
-                    <option value={"שקט"}>שקט</option>
-                    <option value={"חברותי"}>חברותי</option>
-                    <option value={"רועש"}>רועש</option>
+                    })}
                 </select>
-            </div>
 
-            <br></br>
-            <div>
-                {/* <UploadPhotos></UploadPhotos> */}
-            </div>
-            {/* <div class="range-slider">
-        <input onChange={(v) => { move(v) }} id="spin" class="range-slider__range" type="range" value={moveAge} min="0" max="120" name="spin"></input>
-        <span class="range-slider__value">{moveAge}</span>
-    </div> */}
-            {/* <body>
-        <input style={{marginLeft: moveAge+'px',width:"30%"}} type="range" name="spin" id="spin" step="1" value={moveAge}min="0" max="500" onChange={(v) => { move(v) }} />
-        <div id="test"><h3>I want move with range {moveAge} ):</h3></div>
-    </body> */}
 
-            <div>
-                <div style={{
-                    margin: 'auto',
-                    display: 'block',
-                    width: 'fit-content',
-                    color: ' #81005F'
-                }}>
-                    <h3>טווח גילאים:</h3>
-                    <Typography id="range-slider" gutterBottom>
-                        בחר גיל בין טווח הגילאים הבאים:
-                    </Typography>
-                    <Slider
-                        value={moveAge}
-                        onChange={rangeSelector}
-                        valueLabelDisplay="auto"
-                        min={0}
-                        max={120}
 
-                    />
-                    טווח הגיל בין: {moveAge[0]}  ל - {moveAge[1]}
+                <select onChange={(e) => { handleChange(e) }}>
+                    {
+
+                        arrDropDown ? arrDropDown.map((item) => {
+                            return (
+                                <option value={item._id} key={item._id}>{item.nameCategory}</option>
+
+                            )
+                        }) : null}
+                </select> */}
+
+
+                {/* <br></br>
+                <div>
+
+                    <label className="picName"> בחר\י אופי</label>
+                    <select onChange={(e) => { handleChangeCharacter(e) }}>
+                        <option value={"ביישן"}>ביישן </option>
+                        <option value={"שקט"}>שקט</option>
+                        <option value={"חברותי"}>חברותי</option>
+                        <option value={"רועש"}>רועש</option>
+                    </select>
+                </div> */}
+
+
+
+                {/* טווח גילאים */}
+                <div>
+                    <div style={{
+                        margin: 'auto',
+                        display: 'block',
+                        width: 'fit-content',
+                        color: ' #81005F'
+                    }}>
+                        <h3 className="picName">טווח גילאים:</h3>
+                        <Typography id="range-slider" gutterBottom>
+                            בחר גיל בין טווח הגילאים הבאים:
+                        </Typography>
+                        <Slider
+                            value={moveAge}
+                            onChange={rangeSelector}
+                            valueLabelDisplay="auto"
+                            min={0}
+                            max={120}
+
+                        />
+                        טווח הגיל בין: {moveAge[0]}  ל - {moveAge[1]}
+                    </div>
                 </div>
-            </div>
-            <br></br>
-            <br></br>
-            <div>
-                <div style={{
-                    margin: 'auto',
-                    display: 'block',
-                    width: 'fit-content',
-                    color: " #81005F"
-                }}>
-                    <h3>טווח מחירים</h3>
-                    <Typography id="range-slider" gutterBottom>
-                        בחר מחיר בין טווח המחירים הבאים:
-                    </Typography>
-                    <Slider
-                        value={movePrice}
-                        onChange={rangeSelectorAge}
-                        valueLabelDisplay="auto"
-                        min={1}
-                        max={1000}
-                    />
-                    טווח המחירים בין: {movePrice[0]}  ל - {movePrice[1]}
+                <br></br>
+                {/* טווח מחירים */}
+                <div>
+                    <div style={{
+                        margin: 'auto',
+                        display: 'block',
+                        width: 'fit-content',
+                        color: " #81005F"
+                    }}>
+                        <h3 className="picName">טווח מחירים</h3>
+                        <Typography id="range-slider" gutterBottom>
+                            בחר מחיר בין טווח המחירים הבאים:
+                        </Typography>
+                        <Slider
+                            value={movePrice}
+                            onChange={rangeSelectorAge}
+                            valueLabelDisplay="auto"
+                            min={1}
+                            max={1000}
+                        />
+                        טווח המחירים בין: {movePrice[0]}  ל - {movePrice[1]}
+                    </div>
                 </div>
+
+                <br></br>
+                <ImageUploader></ImageUploader>
+                <br></br>
+
+                <button className="button button1" onClick={handleSubmit}>אישור</button>
             </div>
-
-            <br></br>
-            <ImageUploader></ImageUploader>
-            <br></br>
-
-            <button class="button button1" onClick={handleSubmit}>אישור</button>
-        </div>:
-            <div>
-            אינך מחובר
-            <Link to="entry">להתחברות</Link>
-        </div>
+            <br/>
+            </> :
+            <div className='nologed'>
+                אינך מחובר
+                <Link to="entry">להתחברות</Link>
+            </div>
 
 
     );

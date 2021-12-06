@@ -40,7 +40,7 @@ const SubHeader = (props) => {
                 <Nav className="me-auto">
                     {arrChildren && arrChildren.map((item, index) => {
                         return (<div key={index}>
-                            <Nav.Link  as={Link} to={`/${url.substring(1,13)+"s"}/${item}`} onClick={() => {
+                            <Nav.Link  style={{border:index==0&&'none'}} as={Link} to={`/${url.substring(1,13)+"s"}/${item}`} onClick={() => {
                                 func(item);
                             }}  >
                                 {item}

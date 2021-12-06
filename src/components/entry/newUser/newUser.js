@@ -23,7 +23,7 @@ const NewUser = (props) => {
         let newUser = { username, password, email, phone };
         // let newUser = { username, password, email, phone, role };
 
-        props.postUser(newUser).then(()=>history.push('/Try'));
+        props.postUser(newUser).then(()=>history.push('/MyShare'));
         // alert("המשתמש נרשם בהצלחה!")
     }
 

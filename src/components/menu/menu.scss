@@ -22,17 +22,21 @@
   .navbar-light .navbar-nav .nav-link {
    color:rgb(226, 226, 226);
     direction: rtl;
+    border-right: 1px solid white;
+    // border-right: 2px solid white;
     //color: rgba(0,0,0,.55)!important;
   }
   .navbar-nav {
     display: flex;
     flex-direction: column;
-    padding-left: 600px;
+    padding-left: 240px;
     margin-bottom: 0;
     list-style: none;
   
   }
-  
+  .me-auto {
+    margin: auto;}
+
   .NavDropdown{
     background-color: #81005F;
     content: "";

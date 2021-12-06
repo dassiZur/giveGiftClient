@@ -80,7 +80,7 @@ ReactDOM.render(
           <Route path='/ChoseCategories' exact component={SerchByCategory}></Route>
           <Route path='/ChoseCategory/:id' exact component={SerchByCategoryChild}></Route>
           <Route path='/ShareGift' exact component={ShareGift}></Route>
-          <Route path='/Try' exact component={Delete}></Route>
+          <Route path='/MyShare' exact component={Delete}></Route>
           <Route path='/ChoseCategoryFinish/:id' exact component={SerchByCategoryChildFinish}></Route>
           {/* <Entry></Entry> */}
           {/* <newUser></newUser> */}

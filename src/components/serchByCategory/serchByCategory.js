@@ -50,11 +50,12 @@ import SerchByCategoryChild from '../serchByCategoryChild/serchByCategoryChild';
 import PhotoSearch from "../search/photoSearch";
 import Nav from 'react-bootstrap/Nav';
 import axios from "axios"
-import Gallery from 'react-grid-gallery';
+import Gallery from '../search/gallery';
 
 const SerchByCategory = (props) => {
     const [giftsArr, setGiftsArr] = useState([]);
     const getAllImag = () => {
+        debugger
         axios.get("http://localhost:5000/gifts"). then(succ => {                    
             var arrImg = [];
             succ.data.forEach(element => {
@@ -71,37 +72,32 @@ const SerchByCategory = (props) => {
         });
     }
 
-    useEffect(() => { props.getCategory(); getAllImag() }, [])
+    useEffect(() => { props.getCategory(); getAllImag(); }, [])
     const { url, path } = useRouteMatch();
     var item1 = "";
     const func = (x) => {
         item1 = x;
     }
     return (<div>
-        <Router>
             <div>
                 {props.arr.map((item) => {
 
                     return (<div key={item._id}>
-
-                        <Nav.Link
-                            href={`/ChoseCategory/${item._id}`} onClick={() => {
+                        <Nav.Link as={Link} to={`/ChoseCategory/${item._id}`} onClick={() => {
                                 func(item);
-                            }}  >
+                            }}>
                             {item.nameCategory}
-                        </Nav.Link >
-
+                        </Nav.Link>
                     </div>)
                 })}
 
             </div>
 
-        </Router>
         <div>{console.log("item1._id " + item1._id)}</div>
         {/* <SerchByCategoryChild idCategoryChild={item1._id}></SerchByCategoryChild> */}
         {giftsArr &&
 
-            <Gallery images={giftsArr} showLightboxThumbnails={true} />
+            <Gallery giftsArr={giftsArr} />
         }
     </div>
     );
