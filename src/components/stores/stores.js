@@ -41,7 +41,11 @@ const Store = (props) => {
     return (<>
         <div className="container-fluid">
             <div className="row">
-                <h1 style={{ fontFamily: 'inherit', paddingTop: '2%' }}>חנויות בכל הארץ</h1>
+            <div className="col-md-3"></div>
+            <div className="col-md-7">
+            <h1 style={{ fontFamily: 'inherit', paddingTop: '2%' }}>חנויות בכל הארץ</h1>
+            </div>
+
             </div>
             <div className="row">
                 <div className="col-md-3">
