@@ -21,7 +21,7 @@
     display: flex;
     padding: 27px;
     width: 714px;
-    margin-right: 403px;
+    margin: auto;
     margin-top: 19px;
     background-color: #dee2e6;
 }
@@ -53,4 +53,7 @@
 }
 .fa {
     display: contents !important;
+}
+.divLink a {
+    margin-right: 22px;
 }

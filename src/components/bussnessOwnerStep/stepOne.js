@@ -147,7 +147,7 @@ const HorizontalNonLinearStepper = (props) => {
                   {/* <i style="font-size:24px" class="fa">&#xf104;</i> */}
                   <i class="fa fa-angle-left"></i>
                    Next
-                </Link>--
+                </Link>
                 <Link disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                   Back
                   <i class="fa fa-angle-right"></i>
