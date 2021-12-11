@@ -17,32 +17,33 @@ const SerchByCategoryChildFinish = (props) => {
 
     // //פונקציה שמביאה מהשרת את כל התתי קטגוריות
     const [giftsArr, setGiftsArr] = useState([]);
-    const [giftsArr2, setGiftsArr2] = useState([]);
+    // const [giftsArr2, setGiftsArr2] = useState([]);
     const GetGiftsByCategoryId = async () => {
         const id = props.match.params.id;
         debugger;
         axios.get(`http://localhost:5000/gifts/getByIdCategory/${id}`).
             then(succ => {
-             
-                var arrImg = [];
-              //  setGiftsArr(succ.data);
-                succ.data.forEach(element => {
-                    let im = "http://localhost:5000/" + element.gifPhoto;
-                    arrImg.push({
-                        src: im,
-                         thumbnail: im,
-                        thumbnailWidth: 320,
-                        thumbnailHeight: 212,
-                        caption: element.nameGift
-                    })
-                });
-                setGiftsArr(arrImg);
-                axios.get(`http://localhost:5000/gifts/getByIdParentCategory/${id}`).
-                    then(succ => {
-                        console.log("TAMAR REVIVOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-                        setGiftsArr2(succ.data)
-                    }).
-                    catch(error => console.log(error));
+
+                // var arrImg = [];
+                // succ.data.forEach(element => {
+                //     let im = "http://localhost:5000/" + element.gifPhoto;
+                //     arrImg.push({
+                //         src: im,
+                //         thumbnail: im,
+                //         thumbnailWidth: 320,
+                //         thumbnailHeight: 212,
+                //         caption: element.nameGift
+                //     })
+                // });
+                // setGiftsArr(arrImg);
+                setGiftsArr(succ.data);
+
+                // axios.get(`http://localhost:5000/gifts/getByIdParentCategory/${id}`).
+                //     then(succ => {
+                //         console.log("TAMAR REVIVOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+                //         setGiftsArr2(succ.data)
+                //     }).
+                //     catch(error => console.log(error));
             }).
             catch(error => console.log(error));
     }
@@ -50,9 +51,9 @@ const SerchByCategoryChildFinish = (props) => {
         GetGiftsByCategoryId();
     }, []);
     return (<>
-        {giftsArr&&giftsArr.length ?
+        {giftsArr && giftsArr.length ?
 
-            <Gallery giftsArr={giftsArr} />:
+            <Gallery giftsArr={giftsArr} /> :
             <h2>לא קיימות מתנות בקטגוריה זו</h2>
 
             //         giftsArr.map((item, index) =>

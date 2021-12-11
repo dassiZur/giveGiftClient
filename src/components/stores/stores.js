@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { getBusinessOwner } from "../../actions/businessOwner";
 import { connect } from "react-redux";
 import "./stores.scss";
-import { Checkbox } from "@material-ui/core";
+// import { Checkbox } from "@material-ui/core";
 
 const Store = (props) => {
     useEffect(() => { props.getBusinessOwner() }, [])

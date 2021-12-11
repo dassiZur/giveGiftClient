@@ -177,19 +177,20 @@ const SerchByCategoryChild = (props) => {
     const getAllImag = () => {
         debugger;
         axios.get(`http://localhost:5000/gifts/getByIdCategory/${id}`).then(succ => {
-            var arrImg = [];
-            debugger;
-            succ.data.forEach(element => {
-                let im = "http://localhost:5000/" + element.gifPhoto;
-                arrImg.push({
-                    src: im,
-                    thumbnail: im,
-                    thumbnailWidth: 320,
-                    thumbnailHeight: 212,
-                    caption: element.nameGift
-                })
-            });
-            setGiftsArr(arrImg);
+            // var arrImg = [];
+            // debugger;
+            // succ.data.forEach(element => {
+            //     let im = "http://localhost:5000/" + element.gifPhoto;
+            //     arrImg.push({
+            //         src: im,
+            //         thumbnail: im,
+            //         thumbnailWidth: 320,
+            //         thumbnailHeight: 212,
+            //         caption: element.nameGift
+            //     })
+            // });
+            // setGiftsArr(arrImg);
+            setGiftsArr(succ.data);
         }).catch(err => { debugger; console.log(err.response); });
     }
     useEffect(() => {
