@@ -61,7 +61,7 @@ const Store = (props) => {
                             </>)
                         })}
                         </div>
-                        <button onClick={submitFilter}>סנן</button>
+                        <button className='filter-button' onClick={submitFilter}>סנן</button>
                         {/* <input type="checkbox" id="cb1" value="" />
                         <label htmlFor="cb1"> I have a bike</label> */}
                     </div>

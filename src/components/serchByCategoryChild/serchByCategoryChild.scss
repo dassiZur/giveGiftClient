@@ -3,11 +3,22 @@
     // padding: 1px;
 }
 .sidebarfltr {
+    top: 174.125px;
+
     margin: 0;
     padding: 0;
     width: 10vw;
-    background-color: #f1f1f1;
+    // background-color: #f1f1f1;
     position: fixed;
     height: 100%;
     overflow: auto;
+  }
+  .num-input{
+    width: 80%;
+    font-size: inherit;
+    margin: 0 0 9%;
+  }
+  .cb-char-filter{
+      padding:0 12%;
+      text-align: start;
   }
