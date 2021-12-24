@@ -1,59 +1,68 @@
 .mydiv1 {
-    height: 85%;
-    width: 40%;
-    background-color: white;
-    display: inline-block;
-    // padding-top: 13.2em;
-    margin-top: 70px;
+  height: auto;
+  width: 40%;
+  background-color: white;
+  display: inline-block;
+  // padding-top: 13.2em;
+  margin-top: 70px;
 }
 .relaxed {
-     margin-right: 20px !important;
+  margin-right: 20px !important;
 }
-    
+.mydiv1 * {
+  width: auto;
+  margin: auto;
+}
 .div2 {
-    height: 100%;
-    width: 60%;
-    background-color: red;
-    display: inline-block;
+  height: 100%;
+  width: 60%;
+  background-color: red;
+  display: inline-block;
 }
 
-.giveGift{
-    height: 40vh;
-    margin-top: 25vh;
+.giveGift {
+  height: 40vh;
+  margin-top: 25vh;
 }
-#root{
-    height: 100%; 
+#root {
+  height: 100%;
 }
-.DivAll{
-    width: 100%;
-    height: 100%;
+.DivAll {
+  width: 100%;
+  height: 100%;
 }
 // .ui[class*="very relaxed"].grid {
 //     margin-left: -30rem;
 //     margin-right: 12.5rem;
 // }
 a {
-    color: #81005F;
-    text-decoration: none;
+  color: #81005f;
+  text-decoration: none;
 }
 a:hover {
-    color:black;
-    text-decoration: none;
+  color: black;
+  text-decoration: none;
 }
 body {
-    text-align: center;
+  text-align: center;
 }
-.hh{
-    color: black !important ;
+.hh {
+  font-weight: bolder;
+  font-size: larger;
+  font-family: inherit;
+
+  color: black !important ;
 }
-.form {
-    width: 500px;
-    height: 300px;
-    top: -100px;
+.mydiv1 .form {
+  padding-top: 5%;
+
+  width: auto;
+  height: auto;
+  top: 0;
 }
 .MuiIconButton-colorPrimary {
-    color: #81005F;
+  color: #81005f;
 }
-.tafkid{
-    color: black !important;
+.tafkid {
+  color: black !important;
 }

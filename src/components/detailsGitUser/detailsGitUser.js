@@ -1,207 +1,200 @@
 import React, { useState, useEffect } from "react";
-import CreateIcon from "@material-ui/icons/Create";
+
+import "./detailsGiftUser.scss";
+import { connect } from "react-redux";
 import {
-    Box, Button, Snackbar, Table,
-    TableBody, TableCell, TableHead, TableRow
-} from "@material-ui/core";
-import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
-import AddBoxIcon from "@material-ui/icons/AddBox";
-import DoneIcon from "@material-ui/icons/Done";
-import ClearIcon from "@material-ui/icons/Clear";
-import { makeStyles } from "@material-ui/core/styles";
-import Alert from "@material-ui/lab/Alert";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import './detailsGiftUser.scss'
-import { connect } from 'react-redux';
-import { getGift, deleteGift } from '../../actions/gift'
+  getGift,
+  deleteGift,
+  putGift,
+  getGiftsTomanager,
+} from "../../actions/gift";
+import { getAllCategoryChild } from "../../actions/category";
 import { Link } from "react-router-dom";
-// Creating styles
-const useStyles = makeStyles({
-    root: {
-        "& > *": {
-            borderBottom: "unset",
-        },
-    },
-    table: {
-        minWidth: 650,
-    },
-    snackbar: {
-        bottom: "104px",
-    },
-});
-///////////////////////////////////////////////////
-// import axios from "axios"
-// axios.get("http://localhost:5000/gifts/getByUser",user)
-// .then(succ => { arr=succ     
-// }).catch(err => console.log("============this is mistake" + err.message))
-//////////////////////////////////////
+import GiftTable from "./giftTable";
+import GiftEditTable from "./giftEditTable";
+import axios from "axios";
+
 function DetailsGitUser(props) {
-    // Creating style object
-    const classes = useStyles();
-    const [isUser, setIsUser] = useState(true);
+  const statusArray = ["NEW", "APPROVE", "WAITDELETE"];
+  const [isUser, setIsUser] = useState(true);
+  const [isManager, setIsManager] = useState(false);
+  const [managerTables, setManagerTables] = useState();
+  const [tables, setTables] = useState("NEW");
+  let user = JSON.parse(localStorage.getItem("user"));
+  useEffect(() => {
+    if (user) {
+      if (user.role == "MANAGER") {
+        setIsManager(true);
+        props.getGiftsTomanager();
 
-    useEffect(() => {
-        if (JSON.parse(localStorage.getItem("user")))
-            props.getGift()
-        else
-            setIsUser(false)
-    }, []);
-    let user = JSON.parse(localStorage.getItem("user"));
-    //get from server all gift that user=user._id
+        axios.get(`http://localhost:5000/categories/all`).then((succ) => {
+          debugger;
+          props.getAllCategoryChild(succ.data);
+        });
+      }
+      props.getGift();
+    } else setIsUser(false);
+  }, []);
 
+  useEffect(() => {
+    isManager && partTables();
+  }, [props.allGiftarr]);
 
-    // Defining a state named rows
-    // which we can update by calling on setRows function
-    // const [rows, setRows] = useState([  
-    //     // { id: 1, firstname: "", lastname: "", city: "" },
-    //     arr? arr.map((item)=>{
-    //         return{
-    //         id: item._id, firstname: item.nameGift, lastname: item.remark, city: item.character ,
-    //     }}):{ id: 1, firstname: "", lastname: "", city: "" }
+  useEffect(() => {
+    debugger;
+  }, [tables]);
 
-    // ]);
-    //nameGift price category gifPhoto ratedScore ageRange status user remark character
-    // Initial states
-    const [open, setOpen] = React.useState(false);
-    const [isEdit, setEdit] = React.useState(false);
-    const [disable, setDisable] = React.useState(true);
-    const [showConfirm, setShowConfirm] = React.useState(false);
-    const [indexDelete, setIndexDelete] = React.useState(0);
-    // Handle the case of delete confirmation where 
-    // user click yes delete a specific row of id:i
-    const handleNo = () => {
-        setShowConfirm(false);
-    };
-    const handleConfirm = () => {
-        setShowConfirm(true);
-    };
-    const dialog = (i) => {
-        setIndexDelete(i);
-        setShowConfirm(true);
+  function partTables() {
+    let arra = { NEW: [], APPROVE: [], WAITDELETE: [] };
+    props.allGiftarr.forEach((gift) => {
+      arra[gift.status].push(gift);
+    });
+    setManagerTables({ ...arra });
+  }
 
-    }
-    const handleRemoveClick = (i) => {
-        debugger;
+  // function chooseTable(tIndex) {
+  //   var i;
+  //   var x = [...tables];
+  //   for (i = 0; i < x.length; i++) {
+  //     x[i] = "none";
+  //   }
 
-        setShowConfirm(false);
+  //   x[tIndex] = "block";
+  //   setTables(x);
+  //   // style={{marginRight: spacing + 'em'}}
+  // }
+  return isUser ? (
+    <div style={{ overflowX: "clip" }}>
+      {isManager ? (
+        <div>
+          <div className="tab">
+            <button
+              className={"tablinks " + (tables == "NEW" ? "active" : "")}
+              onClick={() => setTables("NEW")}
+            >
+              חדש
+            </button>
+            <button
+              className={"tablinks " + (tables == "APPROVE" ? "active" : "")}
+              onClick={() => setTables("APPROVE")}
+            >
+              מאושר
+            </button>
+            <button
+              className={"tablinks " + (tables == "WAITDELETE" ? "active" : "")}
+              onClick={() => setTables("WAITDELETE")}
+            >
+              לא אושר
+            </button>
+            <button
+              className={"tablinks " + (tables == "MyShare" ? "active" : "")}
+              onClick={() => setTables("MyShare")}
+            >
+              השיתופים שלי
+            </button>
+            {/* <button
+              className={
+                "tablinks " + (tables == "Add Managers" ? "active" : "")
+              }
+              onClick={() => setTables("Add Managers")}
+            >
+              הוספ
+            </button> */}
+          </div>
+          {/* 'NEW', "DELEY", 'APPROVE', 'WAITDELETE' */}
+          {managerTables &&
+            statusArray.map((sts, i) => {
+              return (
+                tables == sts && (
+                  <div className="tabcontent">
+                    {/* <h2>status: {sts}</h2> */}
+                    <GiftEditTable
+                      deleteGift={props.deleteGift}
+                      updateGift={props.putGift}
+                      arr={managerTables[sts]}
+                      getGift={props.getGiftsTomanager}
+                      categoryArr={[
+                        ...props.categoryArr,
+                        ...props.categoryArrChil,
+                      ]}
+                    />
+                  </div>
+                )
+              );
+            })}
 
+          {tables == "MyShare" && (
+            <div className="tabcontent">
+              {/* <h2>"MyShare"</h2> */}
+              <GiftTable
+                deleteGift={props.deleteGift}
+                arr={props.arr}
+                getGift={props.getGift}
+              />
+            </div>
+          )}
+          {tables == "Add Managers" && (
+            <div className="tabcontent" style={{ display: tables[4] }}>
+              <h2>Add Managers</h2>
+            </div>
+          )}
+
+          {/* <div className="tabcontent" style={{ display: tables[1] }}>
+            <h2>status: "APPROVE"</h2>
+            </div>
+            
+            <div className="tabcontent" style={{ display: tables[2] }}>
+            <h2>status: "WAITDELETE"</h2>
+          </div> */}
+        </div>
+      ) : (
+        <GiftTable
+          deleteGift={props.deleteGift}
+          arr={props.arr}
+          getGift={props.getGift}
+        />
+      )}
+      {/* 
         props.deleteGift(props.arr[indexDelete]._id);
         props.arr.filter(p => p._id != props.arr[indexDelete]._id);
-        props.getGift()
-    };
-    return (isUser ?
-        <table>
-            <thead>
-                <tr>
-                    <th >תמונה</th>
-                    <th >שם מתנה</th>
-                    <th >הערה</th>
-                    <th >טווח גיל</th>
-                    <th >טווח מחיר</th>
-                    <th >אופי</th>
-                    <th >קטגוריה </th>
-                    <th >תת קטגוריה </th>
-                    <th >סטטוס</th>
-
-                    {/* <TableCell>Last Name</TableCell>
-                                <TableCell>City</TableCell> */}
-                </tr>
-            </thead>
-            <tbody>
-                {props.arr ?
-                    props.arr.map((row, i) => {
-                        return (
-                            <tr key={i}>
-
-                                {/* <div> */}
-                                <td><img src={"http://localhost:5000/" + row.gifPhoto} className="imgg" /></td>
-                                <td>{row.nameGift}</td>
-                                <td>{row.remark}</td>
-                                <td >{row.ageRange[0]}-{row.ageRange[1]}</td>
-                                <td >{row.price[0]}-{row.price[1]}</td>
-                                <td >{row.character}</td>
-                                <td >{row.nameGift}</td>
-                                <td >{row.status}</td>
-                                <td>
-                                    <Button className="mr10" onClick={() => dialog(i)}>
-                                        <DeleteOutlineIcon />
-                                    </Button>
-                                </td>
-                                <td>
-                                    {showConfirm &&
-                                        <Dialog
-                                            open={showConfirm}
-                                            onClose={handleNo}
-                                            aria-labelledby="alert-dialog-title"
-                                            aria-describedby="alert-dialog-description"
-                                        >
-                                            <DialogTitle id="alert-dialog-title">
-                                                {"Confirm Delete"}
-                                            </DialogTitle>
-                                            <DialogContent>
-                                                <DialogContentText id="alert-dialog-description">
-                                                    Are you sure to delete
-                                                </DialogContentText>
-                                            </DialogContent>
-                                            <DialogActions>
-                                                <Button
-                                                    onClick={() => handleRemoveClick(i)}
-                                                    color="primary"
-                                                    autoFocus
-                                                >
-                                                    Yes
-                                                </Button>
-                                                <Button
-                                                    onClick={handleNo}
-                                                    color="primary"
-                                                    autoFocus
-                                                >
-                                                    No
-                                                </Button>
-                                            </DialogActions>
-                                        </Dialog>
-                                    }
-                                </td>
-
-
-                                {/* component="th" scope="row" */}
-                                {/* <TableCell >
-                                                            {row.remark}
-                                                        </TableCell>
-                                                                                                                                         <TableCell >
-                                                            <TableCell >
-                                                                {row.ageRange[0]}-{row.ageRange[1]}
-                                                            </TableCell>
-                                                            <TableCell >                                                                                    <TableCell >
-                                                                {row.status}
-                                                            </TableCell> */}
-
-                                {/* </div> */}
-
-                            </tr>
-                        );
-                    }) : []}
-            </tbody>
-        </table> :
-        <div>
-            אינך מחובר
-            <Link to="entry">להתחברות</Link>
-        </div>
-    );
+        props.getGift */}
+      {/* manager
+                    <div className='cb-char-filter'>
+                        <input type="checkbox" id={"cbn"} value={1} onChange={(e) => { }} />
+                        <label htmlFor={"cbn"}>status: "NEW"</label>
+                    </div>
+                    <div className='cb-char-filter'>
+                        <input type="checkbox" id={"cbOK"} value={0} onChange={(e) => { }} />
+                        <label htmlFor={"cbOK"}>status: "OK"</label>
+                    </div>
+                    <div className='cb-char-filter'>
+                        <input type="checkbox" id={"cbNOT"} value={true} onChange={(e) => { }} />
+                        <label htmlFor={"cbNOT"}>status: "NOT_OK"</label>
+                    </div>
+ */}
+    </div>
+  ) : (
+    <div>
+      אינך מחובר
+      <Link to="entry">להתחברות</Link>
+    </div>
+  );
 }
 const myMapToProps = (state) => {
-    return {
-        arr: state.giftPart.giftArr
-
-    }
-}
-export default connect(myMapToProps, { getGift, deleteGift })(DetailsGitUser);
-
-
+  return {
+    arr: state.giftPart.giftArr,
+    categoryArr: state.categoryPart.categoryArr,
+    categoryArrChil: state.categoryPart.categoryArrChil,
+    allGiftarr: state.giftPart.allGift,
+  };
+};
+export default connect(myMapToProps, {
+  getGift,
+  deleteGift,
+  putGift,
+  getGiftsTomanager,
+  getAllCategoryChild,
+})(DetailsGitUser);
 
 // ____________modal from mail why?________________
 // import * as React from 'react';
