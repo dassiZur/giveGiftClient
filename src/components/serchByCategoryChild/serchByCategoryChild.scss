@@ -1,13 +1,35 @@
-#ReactGridGallery{
-    margin-right: 10vw;
-    // padding: 1px;
+#ReactGridGallery {
+  margin-right: 10vw;
+  // padding: 1px;
 }
 .sidebarfltr {
-    margin: 0;
-    padding: 0;
-    width: 10vw;
-    background-color: #f1f1f1;
-    position: fixed;
-    height: 100%;
-    overflow: auto;
-  }
+  top: 174.125px;
+
+  margin: 0;
+  padding: 0 1%;
+  width: 10vw;
+  // background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+.div-flex {
+  display: flex;
+  justify-content: center;
+  // padding: 1%;
+  justify-content: space-evenly;
+  padding: 1% 38%;
+}
+
+.num-input {
+  width: 80%;
+  font-size: inherit;
+  margin: 0 0 9%;
+}
+.cb-char-filter {
+  padding: 0 12%;
+  text-align: start;
+}
+.child-category-link {
+  background-color: #ddd3da;
+}

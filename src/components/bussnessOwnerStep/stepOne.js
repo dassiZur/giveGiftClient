@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
@@ -17,7 +16,7 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 //.MuiTypography-body1
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    width: "100%",
     // display: "flex",
     // padding: "27px",
     // width: "724px",
@@ -29,21 +28,19 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
   },
   completed: {
-    display: 'inline-block',
+    display: "inline-block",
   },
   instructions: {
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
   },
-
-
 }));
 
 function getSteps() {
-  return ['פרטים אישיים', 'העלה תמונות', 'תשלום מאובטח'];
+  return ["פרטים אישיים", "העלה תמונות", "תשלום מאובטח"];
 }
 
-function getStepContent(step) {
+function getStepContent(step, handleNext) {
   const initialOptions = {
     "client-id": "test",
     currency: "ILS",
@@ -52,7 +49,7 @@ function getStepContent(step) {
   };
   switch (step) {
     case 0:
-      return <Step1></Step1>;
+      return <Step1 handleNext={handleNext}></Step1>;
     case 1:
       return <ImageUploader multiple={true}></ImageUploader>;
     case 2:
@@ -60,15 +57,13 @@ function getStepContent(step) {
       <PayPalButtons style={{ layout: "horizontal" }} /> 
   </PayPalScriptProvider> ;
     default:
-      return 'Unknown step';
+      return "Unknown step";
   }
 }
 const HorizontalNonLinearStepper = (props) => {
-
   // const MuiPaperRoot = {
   //   "backgroundColor": "#e2e2e2"
   // };
-
 
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -98,8 +93,8 @@ const HorizontalNonLinearStepper = (props) => {
     const newActiveStep =
       isLastStep() && !allStepsCompleted()
         ? // It's the last step, but not all steps have been completed,
-        // find the first step that has been completed
-        steps.findIndex((step, i) => !(i in completed))
+          // find the first step that has been completed
+          steps.findIndex((step, i) => !(i in completed))
         : activeStep + 1;
     setActiveStep(newActiveStep);
   };
@@ -129,7 +124,10 @@ const HorizontalNonLinearStepper = (props) => {
       <Stepper nonLinear activeStep={activeStep}>
         {steps.map((label, index) => (
           <Step key={label}>
-            <StepButton onClick={handleStep(index)} completed={completed[index]}>
+            <StepButton
+              onClick={handleStep(index)}
+              completed={completed[index]}
+            >
               {label}
             </StepButton>
           </Step>
@@ -137,7 +135,7 @@ const HorizontalNonLinearStepper = (props) => {
       </Stepper>
       <div>
         {allStepsCompleted() ? (
-          <div >
+          <div>
             <Typography className={classes.instructions + " div2"}>
               All steps completed - you&apos;re finished
             </Typography>
@@ -145,7 +143,9 @@ const HorizontalNonLinearStepper = (props) => {
           </div>
         ) : (
           <div>
-            <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+            <Typography className={classes.instructions}>
+              {getStepContent(activeStep, handleNext)}
+            </Typography>
             <div>
               <div className="divLink">
                 <Link
@@ -156,14 +156,16 @@ const HorizontalNonLinearStepper = (props) => {
                 >
                   {/* <i style="font-size:24px" class="fa">&#xf104;</i> */}
                   <i class="fa fa-angle-left"></i>
-                   Next
+                  Next
                 </Link>
-                <Link disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+                <Link
+                  disabled={activeStep === 0}
+                  onClick={handleBack}
+                  className={classes.button}
+                >
                   Back
                   <i class="fa fa-angle-right"></i>
                 </Link>
-
-
               </div>
 
               {/* {activeStep !== steps.length &&
@@ -189,14 +191,17 @@ const HorizontalNonLinearStepper = (props) => {
       </div>
     </div>
   );
-}
-const myStateToProps = state => {
-  return {}
-}
-export default connect(myStateToProps, { updateBusinessOwner })(HorizontalNonLinearStepper)
+};
+const myStateToProps = (state) => {
+  return {};
+};
+export default connect(myStateToProps, { updateBusinessOwner })(
+  HorizontalNonLinearStepper
+);
 
-
-{/* <div class="image-thumbnail image-upload-button-container">
+{
+  /* <div class="image-thumbnail image-upload-button-container">
   <input type="file" accept="image/png, image/jpg, image/jpeg" multiple="" class="image-upload-button">
     <span>+</span>
-    </div> */}
+    </div> */
+}

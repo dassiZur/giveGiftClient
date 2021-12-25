@@ -18,7 +18,7 @@
 // //         console.log("hhhhhhhhhhhhh")
 // //     }
 // //     useEffect(() => {
-// //         //props.getCategory() 
+// //         //props.getCategory()
 // //         GetAllCategoriesChild();
 // //     }, [])
 // //     return (<><Router>
@@ -49,7 +49,6 @@
 // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
 // import Navbar from 'react-bootstrap/Navbar';
 // import Nav from 'react-bootstrap/Nav';
 // import Container from 'react-bootstrap/Container';
@@ -69,7 +68,7 @@
 //         axios.get("http://localhost:5000/categories/" + props.idCategoryChild).then(succ => setArr(succ.data));
 //     }
 //     useEffect(() => {
-//         //props.getCategory() 
+//         //props.getCategory()
 //         GetAllCategoriesChild();
 //     }, [])
 //     return (<><Router>
@@ -116,7 +115,7 @@
 //         console.log("hhhhhhhhhhhhh")
 //     }
 //     useEffect(() => {
-//         //props.getCategory() 
+//         //props.getCategory()
 //         GetAllCategoriesChild();
 //     }, [])
 //     return (<><Router>
@@ -147,87 +146,104 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-import Container from 'react-bootstrap/Container';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import Container from "react-bootstrap/Container";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link, useParams } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams,
+} from "react-router-dom";
 import { getCategory } from "../../actions/category";
 import { connect } from "react-redux";
-import axios from "axios"
+import axios from "axios";
 import { expressionStatement } from "@babel/types";
-import './serchByCategoryChild.scss'
-import Gallery from '../search/gallery';
+import "./serchByCategoryChild.scss";
+import Gallery from "../search/gallery";
 
 const SerchByCategoryChild = (props) => {
-    const { id } = useParams();
-    const [arr, setArr] = useState(null);
-    // //פונקציה שמביאה מהשרת את כל התתי קטגוריות
-    const GetAllCategoriesChild = (idCategoryChild) => {
-
-        if (idCategoryChild)
-            axios.get(`http://localhost:5000/categories/${idCategoryChild} `).then(succ => setArr(succ.data));
-        else
-            axios.get(`http://localhost:5000/categories/${props.getSelectCategoryChildren} `).then(succ => setArr(succ.data));
-
-    }
-    const [giftsArr, setGiftsArr] = useState([]);
-    const getAllImag = () => {
+  const { id } = useParams();
+  const [arr, setArr] = useState(null);
+  // //פונקציה שמביאה מהשרת את כל התתי קטגוריות
+  const GetAllCategoriesChild = (idCategoryChild) => {
+    if (idCategoryChild)
+      axios
+        .get(`http://localhost:5000/categories/${idCategoryChild} `)
+        .then((succ) => setArr(succ.data));
+    else
+      axios
+        .get(
+          `http://localhost:5000/categories/${props.getSelectCategoryChildren} `
+        )
+        .then((succ) => setArr(succ.data));
+  };
+  const [giftsArr, setGiftsArr] = useState([]);
+  const getAllImag = () => {
+    debugger;
+    axios
+      .get(`http://localhost:5000/gifts/getByIdCategory/${id}`)
+      .then((succ) => {
+        // var arrImg = [];
+        // debugger;
+        // succ.data.forEach(element => {
+        //     let im = "http://localhost:5000/" + element.gifPhoto;
+        //     arrImg.push({
+        //         src: im,
+        //         thumbnail: im,
+        //         thumbnailWidth: 320,
+        //         thumbnailHeight: 212,
+        //         caption: element.nameGift
+        //     })
+        // });
+        // setGiftsArr(arrImg);
+        setGiftsArr(succ.data.filter((g) => g.status == "APPROVE"));
+      })
+      .catch((err) => {
         debugger;
-        axios.get(`http://localhost:5000/gifts/getByIdCategory/${id}`).then(succ => {
-            // var arrImg = [];
-            // debugger;
-            // succ.data.forEach(element => {
-            //     let im = "http://localhost:5000/" + element.gifPhoto;
-            //     arrImg.push({
-            //         src: im,
-            //         thumbnail: im,
-            //         thumbnailWidth: 320,
-            //         thumbnailHeight: 212,
-            //         caption: element.nameGift
-            //     })
-            // });
-            // setGiftsArr(arrImg);
-            setGiftsArr(succ.data);
-        }).catch(err => { debugger; console.log(err.response); });
-    }
-    useEffect(() => {
-        //props.getCategory() 
-        GetAllCategoriesChild(id); getAllImag()
-    }, [])
-    return (<div>
+        console.log(err.response);
+      });
+  };
+  useEffect(() => {
+    //props.getCategory()
+    GetAllCategoriesChild(id);
+    getAllImag();
+  }, []);
+  return (
+    <div>
+      <div className="div-flex">
+        {console.log(arr)}
+        {console.log("dddddddddddddddddddddddd")}
 
-        <div>
-            {console.log(arr)}
-            {console.log("dddddddddddddddddddddddd")}
+        {arr &&
+          arr.map((item) => {
+            return (
+              <div key={item._id} className="child-category-link">
+                <NavDropdown.Item
+                  as={Link}
+                  to={`/ChoseCategoryFinish/${item._id} `}
+                >
+                  {item.nameCategory}
+                </NavDropdown.Item>
 
-
-            {arr && arr.map((item) => {
-                return (<div key={item._id}>
-
-                    <NavDropdown.Item as={Link} to={`/ChoseCategoryFinish/${item._id} `}>
-                        {item.nameCategory}
-                    </NavDropdown.Item>
-
-                    <Route path={{ pathname: `/ChoseCategoryFinish/${item._id} ` }}>  </Route>
-                </div>)
-            })}
-        </div>
-        {giftsArr ?
-            <Gallery giftsArr={giftsArr} /> :
-            <h2>לא קיימות מתנות בקטגוריה זו</h2>
-        }
+                {/* <Route path={{ pathname: `/ChoseCategoryFinish/${item._id} ` }}>  </Route> */}
+              </div>
+            );
+          })}
+      </div>
+      {giftsArr ? (
+        <Gallery giftsArr={giftsArr} />
+      ) : (
+        <h2>לא קיימות מתנות בקטגוריה זו</h2>
+      )}
     </div>
-    );
-}
+  );
+};
 
 const myMapToProps = (state) => {
-    return {}
-}
+  return {};
+};
 export default connect(myMapToProps, { getCategory })(SerchByCategoryChild);
-
-
-
-

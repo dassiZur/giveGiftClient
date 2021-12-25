@@ -1,0 +1,31 @@
+header
+main
+  article.article
+    h2 Dynamic Sticky Sidebar Component
+
+    p Click on the elements below to add them to the sidebar component.
+
+    ul.items.grid
+      - for (let i = 0; i < 12; i++)
+        li
+          button.item
+            .thumbnail
+            .info
+              .title
+              .subtitle
+
+    p Added this extra content for spacing purposes. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed porta arcu, vitae hendrerit magna. Nullam nec mi augue. Morbi non odio mauris. Vivamus accumsan lectus ac libero ornare lacinia. Etiam quis purus nec augue fermentum interdum. Aliquam sit amet dui rutrum, aliquam augue ut, iaculis arcu. Nunc euismod, magna sit amet gravida gravida, erat diam scelerisque massa, id dignissim sapien elit quis mauris. In interdum lectus id mattis aliquam. Ut pellentesque accumsan consectetur. Curabitur varius mollis lacus, nec rhoncus massa facilisis ac.
+
+    p Maecenas fringilla consectetur blandit. Phasellus pulvinar, eros eleifend fermentum accumsan, leo massa rutrum lectus, nec cursus orci turpis at libero. Quisque dolor ex, suscipit id felis ac, bibendum aliquam enim. Curabitur mollis ligula a ipsum fermentum, in volutpat arcu mattis. Nulla facilisi. Duis mattis venenatis erat non sollicitudin. Phasellus nec augue eget magna eleifend laoreet. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed bibendum dolor euismod erat rhoncus, et mattis enim facilisis. Quisque arcu est, molestie sed massa nec, gravida feugiat massa. Donec id velit mi. Curabitur accumsan elit in magna mollis, quis pharetra felis faucibus.
+
+    p Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In molestie magna sit amet lobortis convallis. Etiam at magna eget risus venenatis luctus quis nec justo. Pellentesque elementum imperdiet mi. Vivamus nec fringilla est. Suspendisse tincidunt euismod turpis quis ornare. Donec et dui in massa porttitor malesuada. Aliquam erat volutpat.
+  aside.sidebar
+    .component 
+      .header Selected Items
+      .content
+        .empty-text Your cart is currently empty
+        ul.items.list
+      .footer
+        button.button Checkout
+        button.button.empty-cart Empty Cart
+footer
