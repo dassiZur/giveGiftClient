@@ -12,6 +12,8 @@ import Step1 from './steps/step1';
 import ImageUploader from '../Photos/photo';
 import { updateBusinessOwner } from '../../actions/businessOwner';
 import { connect } from 'react-redux';
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+
 //.MuiTypography-body1
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,13 +44,21 @@ function getSteps() {
 }
 
 function getStepContent(step) {
+  const initialOptions = {
+    "client-id": "test",
+    currency: "ILS",
+    intent: "capture",
+    "data-client-token": "abc123xyz==",
+  };
   switch (step) {
     case 0:
       return <Step1></Step1>;
     case 1:
       return <ImageUploader multiple={true}></ImageUploader>;
     case 2:
-      return '333333333333333333333333333';
+      return   <PayPalScriptProvider options={{ "client-id": "test" }}> 
+      <PayPalButtons style={{ layout: "horizontal" }} /> 
+  </PayPalScriptProvider> ;
     default:
       return 'Unknown step';
   }

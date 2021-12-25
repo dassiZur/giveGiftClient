@@ -60,7 +60,7 @@ const OneStore = (props) => {
                             </Carousel>
                         </div>
                         <div className="det">
-                            <StoreDetails></StoreDetails>
+                            
                         </div>
 
                     </div>
@@ -70,6 +70,7 @@ const OneStore = (props) => {
 
             })
             }
+            <StoreDetails></StoreDetails>
         </div>
     </>
     );

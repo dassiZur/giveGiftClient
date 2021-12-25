@@ -17,16 +17,17 @@ const MyLocation = (props) => {
 
     return (
       
-        <div style={{ height: '100%', width: '100%' }}>
+        <div style={{ height: '400px', width: '500px' }}>
+            <h1>map</h1>
             <GoogleMapReact
-                bootstrapURLKeys={{ key: 'AIzaSyARe4EGfwVKmSerC4BepoEuPnl6hJ1j6YA' }}
-                defaultCenter={props.center}
-                defaultZoom={props.zoom}
+                bootstrapURLKeys={{ key: 'AIzaSyC42dZGLkeXWn1ofLJhRrWcVBxFY1-tf2Q' }}
+                defaultCenter={{lat: 32.95, lng: 30.33}}
+                defaultZoom={15}
             >
                 <AnyReactComponent
-                    lat={props.center.lat}
-                    lng={props.center.lng}
-                    text={props.txt}
+                    lat={32.95}
+                    lng={30.33}
+                    text={'props.txt'}
                 />
             </GoogleMapReact>
         </div>

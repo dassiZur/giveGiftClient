@@ -51,11 +51,13 @@ const SerchByCategoryChildFinish = (props) => {
         GetGiftsByCategoryId();
     }, []);
     return (<>
+     
         {giftsArr && giftsArr.length ?
 
             <Gallery giftsArr={giftsArr} /> :
             <h2>לא קיימות מתנות בקטגוריה זו</h2>
 
+            
             //         giftsArr.map((item, index) =>
             //             {
             //    let im = "http://localhost:5000/" + item.gifPhoto;
@@ -67,11 +69,10 @@ const SerchByCategoryChildFinish = (props) => {
 
             // })
         }
+
     </>);
 }
 
 export default SerchByCategoryChildFinish;
-
-
 
 
