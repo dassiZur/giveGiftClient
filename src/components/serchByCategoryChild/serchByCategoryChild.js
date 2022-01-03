@@ -157,6 +157,7 @@ import {
   Route,
   Link,
   useParams,
+  useLocation,
 } from "react-router-dom";
 import { getCategory } from "../../actions/category";
 import { connect } from "react-redux";
@@ -207,39 +208,73 @@ const SerchByCategoryChild = (props) => {
         console.log(err.response);
       });
   };
+  const { state } = useLocation();
+
   useEffect(() => {
     //props.getCategory()
     GetAllCategoriesChild(id);
     getAllImag();
   }, []);
   return (
-    <div>
-      <div className="div-flex">
-        {console.log(arr)}
-        {console.log("dddddddddddddddddddddddd")}
+    <>
+      <Navbar bg="light" expand="lg" className="navbar1">
+        <Container className="container">
+          <Nav className="me-auto">
+            {arr &&
+              arr.map((item, index) => {
+                return (
+                  <div key={item._id}>
+                    <Nav.Link
+                      style={{ border: index == 0 && "none" }}
+                      as={Link}
+                      // to={`/ChoseCategoryFinish/${item._id} `}
+                      to={{
+                        pathname: `/ChoseCategoryFinish/${item._id} `,
+                        state: {
+                          name: item.nameCategory,
+                          parentName: state.name,
+                          parentId: id,
+                        },
+                      }}
+                    >
+                      {item.nameCategory}
 
-        {arr &&
-          arr.map((item) => {
-            return (
-              <div key={item._id} className="child-category-link">
-                <NavDropdown.Item
-                  as={Link}
-                  to={`/ChoseCategoryFinish/${item._id} `}
-                >
-                  {item.nameCategory}
-                </NavDropdown.Item>
+                      {/* <GreetingCard GtGreetingCardByCategoryId={item}></GreetingCard> */}
+                    </Nav.Link>
+                  </div>
+                );
+              })}
+          </Nav>
+        </Container>
+      </Navbar>
+      {/* <div>
+        <div className="div-flex">
+          {console.log(arr)}
+          {console.log("dddddddddddddddddddddddd")}
 
-                {/* <Route path={{ pathname: `/ChoseCategoryFinish/${item._id} ` }}>  </Route> */}
-              </div>
-            );
-          })}
-      </div>
+          {arr &&
+            arr.map((item) => {
+              return (
+                <div key={item._id} className="child-category-link">
+                  <NavDropdown.Item
+                    as={Link}
+                    to={`/ChoseCategoryFinish/${item._id} `}
+                  >
+                    {item.nameCategory}
+                  </NavDropdown.Item>
+
+                </div>
+              );
+            })}
+        </div>
+        
+      </div> */}
       {giftsArr ? (
         <Gallery giftsArr={giftsArr} />
       ) : (
         <h2>לא קיימות מתנות בקטגוריה זו</h2>
       )}
-    </div>
+    </>
   );
 };
 

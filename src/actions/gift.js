@@ -91,7 +91,7 @@ export const putAllGift = (gift) => {
 };
 export const putGift = (gift) => {
   return (dispach) => {
-    axios
+    return axios
       .put("http://localhost:5000/gifts/" + gift._id, gift)
       .then((succ) => {
         dispach(putAllGift(succ.data));

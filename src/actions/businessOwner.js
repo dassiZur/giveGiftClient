@@ -16,7 +16,7 @@ export const updBusinessOwner = (businessOwner) => {
 }
 export const postBusinessOwner = (businessOwner) => {
     return (dispach) => {
-        axios.post("http://localhost:5000/businessOwners", businessOwner).then(succ => {
+       return axios.post("http://localhost:5000/businessOwners", businessOwner).then(succ => {
             localStorage.setItem("newBuss",JSON.stringify(succ.data));
             dispach(addBusinessOwner(succ.data))
             // alert("בעל העסק התווסף בהצלחה!!!")

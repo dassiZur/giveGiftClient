@@ -47,10 +47,10 @@ export default function GiftEditTable(props) {
     setItemUpdate(i);
     setShowConfirmEdit(true);
   };
-  const handleEditClick = (i) => {
+  const handleEditClick = async (i) => {
     setShowConfirmEdit(false);
 
-    props.updateGift(itemUpdate);
+    await props.updateGift(itemUpdate);
     // props.arr.filter((p) => p._id != props.arr[indexDelete]._id);
     props.getGift();
   };
@@ -192,9 +192,7 @@ export default function GiftEditTable(props) {
                               שם
                               <br />
                               <input
-                                value={
-                                  itemUpdate.nameGift + "  " + itemUpdate.remark
-                                }
+                                value={ itemUpdate.nameGift }
                                 onChange={(e) =>
                                   setItemUpdate({
                                     ...itemUpdate,

@@ -4,8 +4,7 @@ import { Button, Divider, Form, Grid, Select } from "semantic-ui-react";
 import { postBusinessOwner } from "../../../actions/businessOwner";
 // import NewUser from "../newUser/newUser";
 import "./step1.scss";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import giveGift from "../../entry/giveGift.png";
+
 // import './entry.scss'
 // import '../../entry/entry.scss';
 let bussinesOwner = {
@@ -22,10 +21,9 @@ let bussinesOwner = {
 };
 
 const Step1 = (props) => {
-  const createBussines = () => {
+  const createBussines = async () => {
     // let newUser = { username, password, email, phone, role };
-
-    props.postBusinessOwner(bussinesOwner);
+    await props.postBusinessOwner(bussinesOwner);
     // alert("המשתמש נרשם בהצלחה!")
     props.handleNext();
   };

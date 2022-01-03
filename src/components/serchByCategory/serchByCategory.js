@@ -55,6 +55,7 @@ import PhotoSearch from "../search/photoSearch";
 import Nav from "react-bootstrap/Nav";
 import axios from "axios";
 import Gallery from "../search/gallery";
+import { Container, Navbar } from "react-bootstrap";
 
 const SerchByCategory = (props) => {
   const [giftsArr, setGiftsArr] = useState([]);
@@ -88,29 +89,74 @@ const SerchByCategory = (props) => {
   };
   return (
     <div>
-      <div className="div-flex">
-        {props.arr.map((item) => {
-          return (
-            <div key={item._id}>
-              <Nav.Link
-                as={Link}
-                to={`/ChoseCategory/${item._id}`}
-                onClick={() => {
-                  func(item);
-                }}
-              >
-                {item.nameCategory}
-              </Nav.Link>
-            </div>
-          );
-        })}
-      </div>
+      <Navbar bg="light" expand="lg" className="navbar1">
+        <Container className="container">
+          <Nav className="me-auto">
+            {props.arr &&
+              props.arr.map((item, index) => {
+                return (
+                  <div key={index}>
+                    <Nav.Link
+                      style={{ border: index == 0 && "none" }}
+                      as={Link}
+                      to={{
+                        pathname: `/ChoseCategory/${item._id}`,
+                        state: { name: item.nameCategory },
+                      }}
+                      // to={`/ChoseCategory/${item._id}`}
+                      onClick={() => {
+                        func(item);
+                      }}
+                    >
+                      {item.nameCategory}
 
-      <div>{console.log("item1._id " + item1._id)}</div>
-      {/* <SerchByCategoryChild idCategoryChild={item1._id}></SerchByCategoryChild> */}
+                      {/* <GreetingCard GtGreetingCardByCategoryId={item}></GreetingCard> */}
+                    </Nav.Link>
+                  </div>
+                );
+              })}
+          </Nav>
+        </Container>
+      </Navbar>
+      {/* <div>
+        <div className="div-flex">
+          {props.arr.map((item) => {
+            return (
+              <div key={item._id}>
+                <Nav.Link
+                  as={Link}
+                  to={`/ChoseCategory/${item._id}`}
+                  onClick={() => {
+                    func(item);
+                  }}
+                >
+                  {item.nameCategory}
+                </Nav.Link>
+              </div>
+            );
+          })}
+        </div>
+
+        <div>{console.log("item1._id " + item1._id)}</div>
+      </div> */}
       {giftsArr && <Gallery giftsArr={giftsArr} />}
     </div>
   );
+      }
+const myMapToProps = (state) => {
+  return { arr: state.categoryPart.categoryArr };
+};
+export default connect(myMapToProps, { getCategory })(SerchByCategory);
+
+
+
+
+
+
+
+
+
+
   // return (<><Router>
   //     <div>
   //         {props.arr.map((item) => {
@@ -135,12 +181,12 @@ const SerchByCategory = (props) => {
   //     </div>
   // </Router></>
   // );
-};
 
-const myMapToProps = (state) => {
-  return { arr: state.categoryPart.categoryArr };
-};
-export default connect(myMapToProps, { getCategory })(SerchByCategory);
+
+
+
+
+
 
 // import React, { useEffect } from "react";
 // import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";

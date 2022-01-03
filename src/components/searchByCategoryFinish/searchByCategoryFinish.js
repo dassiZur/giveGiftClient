@@ -9,6 +9,8 @@ import {
   Route,
   Link,
   useParams,
+  useLocation,
+  NavLink,
 } from "react-router-dom";
 import { getCategory } from "../../actions/category";
 import { connect } from "react-redux";
@@ -41,21 +43,26 @@ const SerchByCategoryChildFinish = (props) => {
         // });
         // setGiftsArr(arrImg);
         setGiftsArr(succ.data.filter((g) => g.status == "APPROVE"));
-
-        // axios.get(`http://localhost:5000/gifts/getByIdParentCategory/${id}`).
-        //     then(succ => {
-        //         console.log("TAMAR REVIVOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-        //         setGiftsArr2(succ.data)
-        //     }).
-        //     catch(error => console.log(error));
       })
       .catch((error) => console.log(error));
   };
+  const { state } = useLocation();
   useEffect(() => {
     GetGiftsByCategoryId();
   }, []);
   return (
     <>
+      <NavLink
+        as={Link}
+        to={{
+          pathname: `/ChoseCategory/${state.parentId} `,
+          state: { name: state.parentName },
+        }}
+      >
+        {state.parentName}
+      </NavLink>
+        &gt;
+      {state.name}
       {
         giftsArr && giftsArr.length ? (
           <Gallery giftsArr={giftsArr} />

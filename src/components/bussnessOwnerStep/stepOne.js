@@ -12,6 +12,7 @@ import ImageUploader from '../Photos/photo';
 import { updateBusinessOwner } from '../../actions/businessOwner';
 import { connect } from 'react-redux';
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { useEffect } from "react";
 
 //.MuiTypography-body1
 const useStyles = makeStyles((theme) => ({
@@ -53,9 +54,11 @@ function getStepContent(step, handleNext) {
     case 1:
       return <ImageUploader multiple={true}></ImageUploader>;
     case 2:
-      return   <PayPalScriptProvider options={{ "client-id": "test" }}> 
-      <PayPalButtons style={{ layout: "horizontal" }} /> 
-  </PayPalScriptProvider> ;
+      return (
+        <PayPalScriptProvider options={{ "client-id": "test" }}>
+          <PayPalButtons style={{ layout: "horizontal" }} />
+        </PayPalScriptProvider>
+      );
     default:
       return "Unknown step";
   }
@@ -65,6 +68,9 @@ const HorizontalNonLinearStepper = (props) => {
   //   "backgroundColor": "#e2e2e2"
   // };
 
+  useEffect(() => {
+    localStorage.setItem("newBuss", '');
+  }, []);
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});

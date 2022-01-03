@@ -117,51 +117,62 @@ const Logo = (props) => {
         setPriceFilter(e != 0 ? e : null)
     }
     return (
-        <div>
-            <div className="sidebarfltr">
-                <h3>סינון</h3>
-                {chars.map((char, index) => {
-                    return <div className='cb-char-filter' key={index}>
-                        <input type="checkbox" id={"cb" + index} value={char} onChange={(e) => cbSelect(char)} />
-                        <label htmlFor={"cb" + index}>{char}</label>
-                    </div>
-                })}
-
-                {/* *******  סינון מחיר   ******** */}
-                <h4>סינון מחיר</h4>
-                <Typography id="range-slider" gutterBottom>
-                    בחר מחיר בין {prices[0]} ל{prices[1]}:
-                </Typography>
-                <Slider
-                    value={movePrice}
-                    onChange={priceRangeSelector}
-                    valueLabelDisplay="auto"
-                    min={prices[0]}
-                    max={prices[1]}
-
+      <div>
+        <div className="sidebarfltr">
+          <h3 style={{ backgroundColor: "#6c006c17" }}>סינון</h3>
+          {chars.map((char, index) => {
+            return (
+              <div className="cb-char-filter" key={index}>
+                <input
+                  type="checkbox"
+                  id={"cb" + index}
+                  value={char}
+                  onChange={(e) => cbSelect(char)}
                 />
-                {/* <label>הכנס מחיר בין {prices[0]} ל{prices[1]}</label>
+                <label htmlFor={"cb" + index}>{char}</label>
+              </div>
+            );
+          })}
+
+          {/* *******  סינון מחיר   ******** */}
+          <h4 style={{ backgroundColor: "#6c006c17" }}>סינון מחיר</h4>
+          <Typography id="range-slider" gutterBottom>
+            בחר מחיר בין {prices[0]} ל{prices[1]}:
+          </Typography>
+          <Slider
+            value={movePrice}
+            onChange={priceRangeSelector}
+            valueLabelDisplay="auto"
+            min={prices[0]}
+            max={prices[1]}
+          />
+          {/* <label>הכנס מחיר בין {prices[0]} ל{prices[1]}</label>
                 <input type="number" min={prices[0]} max={prices[1]} className='num-input' onChange={priceSelect} /> */}
 
-                {/* *******  סינון גיל   ******** */}
-                <h4>סינון גיל</h4>
-                <Typography id="range-slider" gutterBottom>
-                    בחר גיל בין {ages[0]} ל{ages[1]}:
-                </Typography>
-                <Slider
-                    value={moveAge}
-                    onChange={ageRangeSelector}
-                    valueLabelDisplay="auto"
-                    min={ages[0]}
-                    max={ages[1]}
-
-                />
-                <button className='filter-button' onClick={submitFilter}>סנן</button>
-            </div>
-            {/* <div style={{marginRight: '15vw'}}> */}
-            <Gallery images={giftsArr} showLightboxThumbnails={true} />
-            {/* </div> */}
-
-        </div>)
+          {/* *******  סינון גיל   ******** */}
+          <h4 style={{ backgroundColor: "#6c006c17" }}>סינון גיל</h4>
+          <Typography id="range-slider" gutterBottom>
+            בחר גיל בין {ages[0]} ל{ages[1]}:
+          </Typography>
+          <Slider
+            value={moveAge}
+            onChange={ageRangeSelector}
+            valueLabelDisplay="auto"
+            min={ages[0]}
+            max={ages[1]}
+          />
+          <button
+            style={{ backgroundColor: "#6c006c17" }}
+            className="filter-button"
+            onClick={submitFilter}
+          >
+            סנן
+          </button>
+        </div>
+        {/* <div style={{marginRight: '15vw'}}> */}
+        <Gallery images={giftsArr} showLightboxThumbnails={true} />
+        {/* </div> */}
+      </div>
+    );
 }
 export default Logo;
